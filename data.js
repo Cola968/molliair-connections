@@ -1,4 +1,4 @@
-/* Fictional network model. Names, service frequencies and operating plans are not real-world schedules. */
+/* Molliair operational planning dataset, 2026–2030. */
 (function(root){
 const airports=[
  ['MOL','Mollicity','Molliland',628,375,1600000],['MBG','Molliburg','Molliland',514,338,120000],['MHH','Mollihausen','Molliland',666,309,62000],['MHF','Mollihafen','Molliland',556,463,38000],
@@ -28,12 +28,12 @@ const routes=[
  {id:'mol-mhh',from:'MOL',to:'MHH',carrier:'ML',byYear:{2026:8,2027:2,2030:2},aircraft:'E190-E2',seats:106,depart:'20:25',returnDepart:'08:00',duration:42,days:['Mo','Fr'],operatedBy2030:'MC'},
  {id:'mol-stc',from:'MOL',to:'STC',carrier:'ML',byYear:{2026:4,2027:6,2030:6},aircraft:'E190-E2',seats:106,depart:'20:55',returnDepart:'07:05',duration:65,days:['Mo','Di','Mi','Do','Fr','So'],operatedBy2030:'MC'},
  {id:'mol-mst',from:'MOL',to:'MST',carrier:'ML',byYear:{2026:0,2027:3,2030:5},aircraft:'E190-E2',seats:106,depart:'20:05',returnDepart:'08:05',duration:45,days:['Mo','Fr','So'],operatedBy2030:'MC'},
- {id:'mol-mia',from:'MOL',to:'MIA',carrier:'ML',byYear:{2026:10,2027:7,2030:10},aircraft:'E195-E2',seats:132,depart:'11:10',returnDepart:'04:30',duration:300,days:['Mo','Di','Mi','Do','Fr','Sa','So'],business:true},
- {id:'mol-bel',from:'MOL',to:'BEL',carrier:'ML',byYear:{2026:5,2027:3,2030:5},aircraft:'E195-E2',seats:132,depart:'11:35',returnDepart:'04:10',duration:270,days:['Mo','Mi','Fr'],business:true},
- {id:'mol-tnr',from:'MOL',to:'TNR',carrier:'ML',byYear:{2026:7,2027:4,2030:5},aircraft:'E190-E2',seats:106,depart:'11:45',returnDepart:'06:40',duration:180,days:['Di','Do','Sa','So'],business:true},
- {id:'mol-ccs',from:'MOL',to:'CCS',carrier:'ML',byYear:{2026:2,2027:0,2030:0},aircraft:'E190-E2',seats:106,depart:'12:05',returnDepart:'05:00',duration:240,days:['Di','Sa']},
- {id:'mol-geo',from:'MOL',to:'GEO',carrier:'ML',byYear:{2026:0,2027:0,2030:2},aircraft:'E190-E2',seats:106,depart:'12:15',returnDepart:'06:40',duration:210,days:['Mo','Fr'],business:true},
- {id:'mol-pty',from:'MOL',to:'PTY',carrier:'ML',byYear:{2026:0,2027:0,2030:2},aircraft:'E190-E2',seats:106,depart:'12:20',returnDepart:'06:30',duration:210,days:['Di','Sa'],business:true},
+ {id:'mol-mia',from:'MOL',to:'MIA',carrier:'ML',byYear:{2026:10,2027:7,2030:10},aircraft:'E195-E2',seats:132,depart:'11:10',returnDepart:'13:05',duration:300,days:['Mo','Di','Mi','Do','Fr','Sa','So'],business:true},
+ {id:'mol-bel',from:'MOL',to:'BEL',carrier:'ML',byYear:{2026:5,2027:3,2030:5},aircraft:'E195-E2',seats:132,depart:'11:35',returnDepart:'14:00',duration:270,days:['Mo','Mi','Fr'],business:true},
+ {id:'mol-tnr',from:'MOL',to:'TNR',carrier:'ML',byYear:{2026:7,2027:4,2030:5},aircraft:'E190-E2',seats:106,depart:'11:45',returnDepart:'15:35',duration:180,days:['Di','Do','Sa','So'],business:true},
+ {id:'mol-ccs',from:'MOL',to:'CCS',carrier:'ML',byYear:{2026:2,2027:0,2030:0},aircraft:'E190-E2',seats:106,depart:'12:05',returnDepart:'14:10',duration:240,days:['Di','Sa']},
+ {id:'mol-geo',from:'MOL',to:'GEO',carrier:'ML',byYear:{2026:0,2027:0,2030:2},aircraft:'E190-E2',seats:106,depart:'12:15',returnDepart:'15:00',duration:210,days:['Mo','Fr'],business:true},
+ {id:'mol-pty',from:'MOL',to:'PTY',carrier:'ML',byYear:{2026:0,2027:0,2030:2},aircraft:'E190-E2',seats:106,depart:'12:20',returnDepart:'15:00',duration:210,days:['Di','Sa'],business:true},
  {id:'sa-mol-stc',from:'MOL',to:'STC',carrier:'SA',byYear:{2026:3,2027:6,2030:6},aircraft:'E175',seats:76,depart:'20:10',returnDepart:'08:35',duration:65,days:['Mo','Di','Mi','Do','Fr','Sa'],business:true},
  {id:'aa-mia',from:'MOL',to:'MIA',carrier:'AA',byYear:{2026:6,2027:7,2030:7},aircraft:'B737-800',seats:160,depart:'12:05',returnDepart:'04:05',duration:300,days:['Mo','Di','Mi','Do','Fr','Sa','So'],business:true},
  {id:'aa-bos',from:'MOL',to:'BOS',carrier:'AA',byYear:{2026:0,2027:3,2030:3},aircraft:'B737 MAX 8',seats:172,depart:'17:25',returnDepart:'07:10',duration:305,days:['Mo','Mi','Fr'],seasonal:true,business:true},
@@ -54,6 +54,6 @@ const routes=[
  {id:'sc-mhf-bgi',from:'MHF',to:'BGI',carrier:'SC',byYear:{2026:2,2027:2,2030:2},aircraft:'Dornier 228',seats:19,depart:'10:15',returnDepart:'06:20',duration:220,days:['Sa','So'],seasonal:true},
  {id:'ml-mbg-ccs',from:'MBG',to:'CCS',carrier:'ML',byYear:{2026:0,2027:0,2030:1},aircraft:'E190-E2',seats:106,depart:'10:35',returnDepart:'06:25',duration:240,days:['Sa'],seasonal:true}
 ];
-const data={airports,airlines,routes,years:[2026,2027,2030],weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'],disclaimer:'Fiktiver Molliland-Flugplan · keine Live-Flüge, Preise oder Buchungen.'};
+const data={airports,airlines,routes,years:[2026,2027,2030],weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'],disclaimer:'Molliair Streckennetz und Flugplanübersicht.'};
 root.FLIGHT_DATA=data;if(typeof module!=='undefined'&&module.exports)module.exports=data;
 })(typeof window!=='undefined'?window:globalThis);
