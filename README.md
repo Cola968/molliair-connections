@@ -12,6 +12,7 @@ https://cola968.github.io/molliair-connections/
 - Departure/arrival airport lookup, travel dates, round trip/one way, adults/children/infants.
 - Search routes by calendar date against an explicit weekday schedule; direct flights and chronological one- or two-stop connections, including long transfers (up to 24 hours per connection) and next-day departures.
 - Price-by-day date strip, connection filters (direct / at most one / all), sorting, expandable flight-leg timeline, layover alerts, and suggestions for the next four available travel dates.
+- Other-airline search across scheduled Stachelair, Copa, American, LATAM, Azul, Air Canada, Caribbean Airlines and additional network operators, with airline-scope filter (all / Molliair group / includes other carriers), clear operator names per leg, and visible partner restrictions.
 - Side-by-side LIGHT, CLASSIC, FLEX, and eligible BUSINESS fares.
 - Traveler details, fare changes, baggage, priority, meals, seat map, running fare totals and journey review.
 - Browser-local journey plan, reference lookup, updates/cancellation, simulated check-in window and printable itinerary.
@@ -20,9 +21,13 @@ https://cola968.github.io/molliair-connections/
 - Destinations, offer pages, fleet, Molliair City, baggage, club profile, newsroom, FAQs and legal information.
 - Responsive at mobile and desktop widths, keyboard navigation and form validation.
 
+## Hub-banking project note
+
+The 2030 inbound/outbound hub wave timings are a separate **draft** and have **not** replaced the current 2027 timetable in `data.js`. In particular, the Monday MBG→MOL→MHH connection still has a long layover under the existing schedule. Do not silently claim that the improved timetable is already in production before tail rotations and service-day patterns are approved.
+
 ## Important boundary
 
-This site is an airline website concept with an interactive booking preview; it does **not** process real payments, create real airline reservations, issue tickets or supply real-time flight status. Example prices and flight plans are drawn from the Molliair project dataset and the operational plan is not fully tail-assigned. Long stopovers are labeled clearly and are not independently verified for protected same-ticket transfer, airport overnight access, or luggage through-checking. The final checkout step communicates the limitation to the traveler.
+This site is an airline website concept with an interactive booking preview; it does **not** process real payments, create real airline reservations, issue tickets or supply real-time flight status. Example prices and flight plans are drawn from the Molliair project dataset and the operational plan is not fully tail-assigned. Partner-airline options are indicative mixed-operator itineraries, **not** proof of any existing codeshare, interline agreement, through-ticket availability, baggage transfer or partner fare inventory. Their prices are example calculations, partner seating is not offered and ticket/fare rules require verification. Long stopovers are labeled clearly and are not independently verified for protected same-ticket transfer, airport overnight access, or luggage through-checking. The final checkout step communicates the limitation to the traveler.
 
 ## Development
 
