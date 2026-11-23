@@ -10,7 +10,8 @@ https://cola968.github.io/molliair-connections/
 
 - Airline homepage with hero, destination offers and booking widget.
 - Departure/arrival airport lookup, travel dates, round trip/one way, adults/children/infants.
-- Search routes by calendar date against an explicit weekday schedule; direct flights and valid single connections via Mollicity.
+- Search routes by calendar date against an explicit weekday schedule; direct flights and chronological one- or two-stop connections, including long transfers (up to 24 hours per connection) and next-day departures.
+- Price-by-day date strip, connection filters (direct / at most one / all), sorting, expandable flight-leg timeline, layover alerts, and suggestions for the next four available travel dates.
 - Side-by-side LIGHT, CLASSIC, FLEX, and eligible BUSINESS fares.
 - Traveler details, fare changes, baggage, priority, meals, seat map, running fare totals and journey review.
 - Browser-local journey plan, reference lookup, updates/cancellation, simulated check-in window and printable itinerary.
@@ -21,7 +22,7 @@ https://cola968.github.io/molliair-connections/
 
 ## Important boundary
 
-This site is an airline website concept with an interactive booking preview; it does **not** process real payments, create real airline reservations, issue tickets or supply real-time flight status. Example prices and flight plans are drawn from the Molliair project dataset and the operational plan is not fully tail-assigned. The final checkout step communicates the limitation to the traveler.
+This site is an airline website concept with an interactive booking preview; it does **not** process real payments, create real airline reservations, issue tickets or supply real-time flight status. Example prices and flight plans are drawn from the Molliair project dataset and the operational plan is not fully tail-assigned. Long stopovers are labeled clearly and are not independently verified for protected same-ticket transfer, airport overnight access, or luggage through-checking. The final checkout step communicates the limitation to the traveler.
 
 ## Development
 
