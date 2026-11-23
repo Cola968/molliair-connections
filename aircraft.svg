@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-label="Molliair Embraer E2 Illustration">
+<defs>
+<linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".48" stop-color="#edf7fb"/><stop offset=".68" stop-color="#b8ccd7"/><stop offset="1" stop-color="#557a90"/></linearGradient>
+<linearGradient id="wing" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#fafefe"/><stop offset=".7" stop-color="#b6d2df"/><stop offset="1" stop-color="#5e8da3"/></linearGradient>
+<linearGradient id="engine" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fafefe"/><stop offset="1" stop-color="#627e96"/></linearGradient>
+<filter id="shadow" x="-.4" y="-.7" width="1.8" height="2.5"><feDropShadow dx="0" dy="20" stdDeviation="13" flood-color="#093148" flood-opacity=".42"/></filter>
+</defs>
+<g transform="translate(0 22) rotate(-5 500 245)" filter="url(#shadow)">
+<!-- vertical stabilizer -->
+<path d="M148 211 83 70Q81 62 94 62L128 67 254 214Z" fill="url(#wing)" stroke="#b1c9d5" stroke-width="2"/>
+<path d="M113 83 189 211 226 212 134 79Z" fill="#b5d72c" opacity=".96"/>
+<path d="M127 107 186 209" stroke="#365f7a" stroke-width="8" stroke-linecap="round"/>
+<!-- horizontal tailplane -->
+<path d="M136 231 42 291 58 300 252 246Z" fill="url(#wing)" stroke="#b6ccd8" stroke-width="2"/>
+<!-- far wing -->
+<path d="M482 216 372 72 396 73 635 215Z" fill="#a4c2d2" stroke="#789bb2" stroke-width="2"/>
+<!-- fuselage -->
+<path d="M100 219C203 194 323 200 492 200L773 200Q853 198 910 216Q946 228 950 242Q952 262 922 269Q866 284 764 278L422 272Q243 273 130 255Q105 251 97 239Q93 227 100 219Z" fill="url(#body)" stroke="#c4d9e3" stroke-width="2"/>
+<path d="M109 245Q287 266 496 260L770 260Q882 259 943 246Q933 270 866 274L446 267Q216 268 109 250Z" fill="#0c3e61" opacity=".87"/>
+<path d="M137 250Q310 267 780 262" stroke="#bde543" stroke-width="5" fill="none"/>
+<!-- windows -->
+<g fill="#315972" stroke="#bdd0de" stroke-width="1">
+<rect x="292" y="218" width="17" height="12" rx="5"/><rect x="318" y="218" width="17" height="12" rx="5"/>
+<rect x="344" y="218" width="17" height="12" rx="5"/><rect x="370" y="217" width="17" height="12" rx="5"/>
+<rect x="396" y="217" width="17" height="12" rx="5"/><rect x="422" y="217" width="17" height="12" rx="5"/>
+<rect x="448" y="216" width="17" height="12" rx="5"/><rect x="474" y="216" width="17" height="12" rx="5"/>
+<rect x="500" y="216" width="17" height="12" rx="5"/><rect x="526" y="216" width="17" height="12" rx="5"/>
+<rect x="552" y="216" width="17" height="12" rx="5"/><rect x="578" y="216" width="17" height="12" rx="5"/>
+<rect x="604" y="216" width="17" height="12" rx="5"/><rect x="630" y="216" width="17" height="12" rx="5"/>
+<rect x="656" y="216" width="17" height="12" rx="5"/><rect x="682" y="216" width="17" height="12" rx="5"/>
+<rect x="708" y="216" width="17" height="12" rx="5"/>
+</g>
+<!-- forward cockpit -->
+<path d="M835 218Q869 207 897 213L914 227Q894 228 881 236L847 235Z" fill="#193f5b"/><path d="m878 213 8 20" stroke="#afc7d6" stroke-width="3"/>
+<!-- main wing -->
+<path d="M507 251 286 385Q281 396 313 396L347 397 641 266 624 251Z" fill="url(#wing)" stroke="#d5e6ee" stroke-width="3"/>
+<path d="M358 368 617 254 633 259 341 390Z" fill="#7ca2b7" opacity=".85"/>
+<!-- engines -->
+<path d="M552 276Q567 269 606 274Q632 281 637 305Q641 340 615 352L566 350Q536 337 539 310Q540 286 552 276Z" fill="url(#engine)" stroke="#698fa4" stroke-width="3"/>
+<ellipse cx="562" cy="311" rx="21" ry="35" fill="#244b68" stroke="#e9f5f9" stroke-width="6"/>
+<ellipse cx="560" cy="311" rx="9" ry="20" fill="#10283e"/>
+<!-- airline title -->
+<text x="724" y="249" font-family="Arial,sans-serif" font-weight="800" font-size="28" letter-spacing="-1.6" fill="#153c5a">molli<tspan fill="#85af25">air</tspan></text>
+</g>
+</svg>
