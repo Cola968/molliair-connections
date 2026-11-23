@@ -1,49 +1,60 @@
-# MolliConnect — Flight Network Explorer
+# Molliair | Airline Passenger Website
 
-Eine eigenständige, offline lauffähige Streckenkarten-Webapp für die **fiktive** Molliland-/Molliair-Welt. Von FlightConnections inspiriert, aber mit eigenem Layout, eigens gezeichneten Inseln, eigenem Routing und ohne geschützte FlightConnections-Bilder oder -Marken.
+Responsive, browser-based airline passenger experience for **Molliair**, **Molliair City** and **Aurelia Regional Group (ARG)**.
 
-## Start
+## Live site
 
-Einfach `index.html` doppelklicken. Alternativ in diesem Verzeichnis:
+https://cola968.github.io/molliair-connections/
 
-```bash
-python -m http.server 8000
-```
+## Features
 
-Dann `http://localhost:8000` öffnen. Es ist keine Installation, kein API-Schlüssel und kein Backend notwendig. Die Webapp nutzt nur lokale JS- und CSS-Dateien; optionale Webfonts fallen offline auf Systemschriftarten zurück.
+- Airline homepage with hero, destination offers and booking widget.
+- Departure/arrival airport lookup, travel dates, round trip/one way, adults/children/infants.
+- Search routes by calendar date against an explicit weekday schedule; direct flights and valid single connections via Mollicity.
+- Side-by-side LIGHT, CLASSIC, FLEX, and eligible BUSINESS fares.
+- Traveler details, fare changes, baggage, priority, meals, seat map, running fare totals and journey review.
+- Browser-local journey plan, reference lookup, updates/cancellation, simulated check-in window and printable itinerary.
+- Planned flight times by flight number and day (not live position or operational data).
+- 2026, 2027 and 2030 route map, airline filters and interactive airport pin list.
+- Destinations, offer pages, fleet, Molliair City, baggage, club profile, newsroom, FAQs and legal information.
+- Responsive at mobile and desktop widths, keyboard navigation and form validation.
 
-## Funktionen
+## Important boundary
 
-- Interaktive, zoombare und verschiebbare **fiktive Inselkarte** für Molliland, Stachelland, Mialand sowie ausgewählte internationale Ziele
-- Direktflugübersicht nach Airport und Airline; Suche **Von–Nach**
-- Router für Direkt- und 1-Stop-Verbindungen mit Mindestsitzplatz-/Anschlusszeitenmodell, Airlinewechsel und „nur gleiche Airline“
-- Filter für Fluggesellschaft, Gruppe, Allianz, Flugzeug, Land, Wochentag, Flugdauer, Saisonalität und fiktives Business-Angebot
-- Modellstände 2026, Sommer 2027, geplantes ARG-Netz 2030
-- Abflug-/Ankunftstafel, Verkehrstage und Routendetails
-- Netzwerkstatistik, Streckenvergleich über drei Jahre
-- CSV-Export, Favoriten im Browser, teilbare Suche per URL, Desktop-/Mobilmodus und helles/dunkles Layout
-- Tests für Routing und den kanonischen Molliair-Flugplan
+This site is an airline website concept with an interactive booking preview; it does **not** process real payments, create real airline reservations, issue tickets or supply real-time flight status. Example prices and flight plans are drawn from the Molliair project dataset and the operational plan is not fully tail-assigned. The final checkout step communicates the limitation to the traveler.
 
-## Eckdaten
+## Development
 
-- 2027 Molliair ab MOL: 32 wöchentliche Abflüge, einschließlich Miastadt MST 3/W mit E190-E2.
-- Miastadt gehört zu Mialand, nicht zu Molliland.
-- Flüge der anderen Airlines und deren Uhrzeiten sind zusätzliche fiktive Modellannahmen.
-- 2030: Molliair City als regionale ARG-Tochter; Frequenzen sind Zukunftsszenarien und keine bestätigten Buchungen.
-
-## Einschränkungen
-
-Die Karte ist **schematisch, nicht georeferenziert**. Alle Betriebszeiten, Flugnummern, Zielorte und Airlineverknüpfungen sind für diese fiktive Welt simuliert. Flugpläne wurden nicht gegen einen vollständigen Flugzeug- und Besatzungsumlauf geprüft. Keine Live-Daten, Preise, echten Tickets, Klassenverfügbarkeit oder offiziellen externen Flug-APIs. Nonstop/1-Stop-Suche innerhalb eines Verkehrstags; keine Umstiege über Mitternacht oder Multicity-Routing. Es werden keine Daten an einen Server gesendet.
-
-## Tests
+Static HTML/CSS/JavaScript with no build chain. Run a local static server:
 
 ```bash
-node tests/logic.test.cjs
+python3 -m http.server 8844
 ```
 
-## Code
+Then open `http://localhost:8844/`.
 
-- `data.js`: Flughäfen, Airlines, Strecken, Jahre und Frequenzen
-- `logic.js`: Flugplanausweitung, Graphsuche, Transferprüfung, Statistik
-- `app.js`: DOM-Steuerung, interaktive SVG-Karte, Filter und Ansichten
-- `styles.css`: Desktop-/Mobile-Layout und Themes
+Tests (Node.js >= 18):
+
+```bash
+npm test
+```
+
+Run browser checks using a Playwright browser where available (the local tests here are separate from production assets).
+
+## Structure
+
+- `index.html` — document structure, navigation and footer
+- `airline.css` — responsive visual design
+- `airline.js` — pages and booking workflow
+- `airline-core.js` — deterministic date search, itineraries and fare calculations
+- `data.js`, `logic.js` — Molliair project airports, airlines and frequency data
+- `aircraft.svg`, `favicon.svg` — original Molliair vector artwork
+- `tests/` — regression tests for schedule, route connections and pricing
+
+## Visual sources
+
+Independent photography from Unsplash is referenced remotely as supporting website artwork. The airBaltic/Lufthansa sites were researched as UX references; no third-party site code, trademarks or design assets were duplicated.
+
+## Network-model boundaries
+
+Molliair 2027 routes are built from the 32 weekly departures from Mollicity. Evening international arrivals are aligned with regional outbound connections at the route-search level. This does not claim full operational crew/aircraft rotation feasibility.
