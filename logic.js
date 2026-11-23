@@ -13,8 +13,8 @@ const makeDays=(r,count)=>{
 };
 function routesForYear(data,year){return data.routes.filter(r=>(r.byYear[year]||0)>0).map(r=>({ ...r,frequency:r.byYear[year],daysActive:makeDays(r,r.byYear[year]),carrier:(year>=2030&&r.operatedBy2030)||r.carrier}));}
 function expandFlights(routes,data){const out=[];for(const r of routes){r.daysActive.forEach((day,n)=>{let seq=String(n+1).padStart(2,'0');
- out.push({id:r.id+'-o-'+n,routeId:r.id,from:r.from,to:r.to,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration,depart:r.depart,departMinute:asMin(r.depart),arrive:fmtTime(asMin(r.depart)+r.duration),arriveMinute:asMin(r.depart)+r.duration,flightNo:r.carrier+(100+data.routes.findIndex(x=>x.id===r.id)*3)+seq});
- out.push({id:r.id+'-i-'+n,routeId:r.id,from:r.to,to:r.from,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration,depart:r.returnDepart,departMinute:asMin(r.returnDepart),arrive:fmtTime(asMin(r.returnDepart)+r.duration),arriveMinute:asMin(r.returnDepart)+r.duration,flightNo:r.carrier+(101+data.routes.findIndex(x=>x.id===r.id)*3)+seq});
+ out.push({id:r.id+'-o-'+n,routeId:r.id,from:r.from,to:r.to,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration,depart:r.depart,departMinute:asMin(r.depart),arrive:fmtTime(asMin(r.depart)+r.duration),arriveMinute:asMin(r.depart)+r.duration,flightNo:r.carrier+(101+data.routes.findIndex(x=>x.id===r.id)*20+n*2)});
+ out.push({id:r.id+'-i-'+n,routeId:r.id,from:r.to,to:r.from,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration,depart:r.returnDepart,departMinute:asMin(r.returnDepart),arrive:fmtTime(asMin(r.returnDepart)+r.duration),arriveMinute:asMin(r.returnDepart)+r.duration,flightNo:r.carrier+(102+data.routes.findIndex(x=>x.id===r.id)*20+n*2)});
  });}return out;}
 const routeClass=(data,carrier)=>data.airlines.find(x=>x.id===carrier)?.group||'Andere';
 function flightsFor(data,opts={}){
