@@ -1,0 +1,1 @@
+{"name":"molliair-connections","version":"1.0.0","private":true,"description":"Interactive fictional airline route explorer for Molliland","scripts":{"test":"node tests/logic.test.cjs"},"license":"MIT"}
