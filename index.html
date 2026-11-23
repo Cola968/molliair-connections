@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#08131e"><meta name="description" content="Interaktiver fiktiver Flugstrecken-Explorer für Molliland, Molliair und Molliair City mit Streckenkarte, Umstiegen und Flugplänen.">
+  <title>Molliair Connections — Interaktive Flugstreckenkarte</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" id="homeLogo" tabindex="0" role="button" aria-label="Startseite anzeigen"><span class="brand-mark">✦</span><span><strong>MOLLI<span class="brand-accent">CONNECT</span></strong><small>FLIGHT NETWORK EXPLORER</small></span></div>
+    <nav class="top-tabs" aria-label="Hauptnavigation">
+      <button class="nav-tab active" data-view="routes">◈ <span>Streckenkarte</span></button>
+      <button class="nav-tab" data-view="board">▤ <span>Flugplan</span></button>
+      <button class="nav-tab" data-view="network">◴ <span>Netzanalyse</span></button>
+      <button class="nav-tab" data-view="compare">▥ <span>Vergleich</span></button>
+    </nav>
+    <div class="top-actions"><span class="demo-pill"><span class="status-dot"></span> SIMULATION 2027</span><button id="helpBtn" class="square-btn" title="Hilfe">?</button><button id="themeBtn" class="square-btn" title="Design umschalten">☀</button></div>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar" id="sidebar">
+      <div class="side-top"><div><div class="eyebrow">FLIGHT NETWORK</div><h1>Wohin möchtest du fliegen?</h1><p>Alle Verbindungen der fiktiven Molliland-Welt auf einer Karte.</p></div></div>
+      <div class="search-module">
+        <div class="field-stack">
+          <label class="search-field"><span class="field-icon origin-icon">●</span><span class="field-entry"><small>VON</small><input id="fromInput" list="airport-list" placeholder="Flughafen oder Stadt" autocomplete="off" aria-label="Abflugflughafen"></span><button id="clearFrom" class="ghost-x" title="Ausgangsort löschen">×</button></label>
+          <button id="swapBtn" class="swap-btn" title="Start und Ziel tauschen">⇅</button>
+          <label class="search-field"><span class="field-icon target-icon">◆</span><span class="field-entry"><small>NACH</small><input id="toInput" list="airport-list" placeholder="Alle Ziele anzeigen" autocomplete="off" aria-label="Zielflughafen"></span><button id="clearTo" class="ghost-x" title="Ziel löschen">×</button></label>
+          <datalist id="airport-list"></datalist>
+        </div>
+        <div class="search-options"><div class="segmented" id="stopsSeg"><button data-stop="0" class="selected">Nonstop</button><button data-stop="1">Mit Umstieg</button></div><button class="advanced-button" id="filtersToggle" aria-expanded="false">☷ Filter <span class="counter" id="activeFilterCount">0</span></button></div>
+        <div class="filters" id="filtersPanel" hidden>
+          <div class="filter-title">Erweiterte Suche <button id="resetFilters">Zurücksetzen</button></div>
+          <div class="filter-row"><label for="airlineSelect">Airline</label><select id="airlineSelect"><option value="Alle">Alle Airlines</option></select></div>
+          <div class="filter-row"><label for="groupSelect">Gruppe</label><select id="groupSelect"><option value="Alle">Alle Gruppen</option><option>ARG</option><option>Partner</option><option>Andere</option></select></div>
+          <div class="filter-row"><label for="allianceSelect">Allianz</label><select id="allianceSelect"><option value="Alle">Alle Allianzen</option><option>ARG-Verbund</option><option>Star Alliance</option><option>Oneworld</option><option>Ohne Allianz</option></select></div>
+          <div class="filter-row"><label for="planeSelect">Flugzeugtyp</label><select id="planeSelect"><option value="Alle">Alle Flugzeuge</option></select></div>
+          <div class="filter-row"><label for="countrySelect">Land</label><select id="countrySelect"><option value="Alle">Alle Länder</option></select></div>
+          <div class="filter-row"><label for="daySelect">Wochentag</label><select id="daySelect"><option value="Alle">Alle Tage</option><option value="Mo">Montag</option><option value="Di">Dienstag</option><option value="Mi">Mittwoch</option><option value="Do">Donnerstag</option><option value="Fr">Freitag</option><option value="Sa">Samstag</option><option value="So">Sonntag</option></select></div>
+          <div class="filter-row"><label for="durationSelect">Max. Flugdauer</label><select id="durationSelect"><option value="">Unbegrenzt</option><option value="60">1 Stunde</option><option value="120">2 Stunden</option><option value="240">4 Stunden</option><option value="360">6 Stunden</option></select></div>
+          <label class="check-line"><input id="sameAirline" type="checkbox"> Nur gleiche Airline bei Umstieg</label>
+          <label class="check-line"><input id="businessOnly" type="checkbox"> Nur Strecken mit Business-Angebot (Szenario)</label>
+          <div class="filter-footnote">Preise, Tarifklassen, echte Sitzplatzverfügbarkeit und weltweite Live-Routen sind mangels Daten nicht verfügbar.</div>
+        </div>
+        <div class="period-controls"><label><small>NETZSTAND</small><select id="yearSelect"><option value="2026">Sommer 2026</option><option value="2027" selected>Sommer 2027</option><option value="2030">Zielnetz 2030</option></select></label><label><small>DATUM / SAISON</small><input type="date" id="dateInput" value="2027-07-05"></label></div>
+      </div>
+      <section class="list-header"><div><div class="eyebrow" id="resultsEyebrow">DIREKTVERBINDUNGEN</div><h2 id="resultsTitle">Ab Mollicity</h2></div><span id="resultsCount" class="count-pill">0</span></section>
+      <div id="results" class="results" aria-live="polite"></div>
+      <div class="sidebar-footer"><button id="exportBtn">↓ CSV exportieren</button><button id="shareBtn">↗ Link kopieren</button><span>Eigene Simulationsdaten</span></div>
+    </aside>
+    <section class="map-space" id="mapSpace">
+      <div class="map-toolbar"><div class="map-context"><span class="map-dot"></span><span id="mapContext">Flugstrecken · Sommer 2027</span></div><div class="map-controls"><button id="showLabelsBtn" class="map-tool active" title="Labels ein- oder ausblenden">Aa</button><button id="favOnlyBtn" class="map-tool" title="Nur gespeicherte Routen">☆</button><button id="zoomIn" class="map-tool" title="Vergrößern">+</button><button id="zoomOut" class="map-tool" title="Verkleinern">−</button><button id="zoomReset" class="map-tool" title="Karte zurücksetzen">⌂</button></div></div>
+      <div class="map-wrap" id="mapWrap"><svg id="routeMap" viewBox="0 0 1200 780" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Interaktive fiktive Weltkarte mit Flughäfen und Flugstrecken"></svg><div class="map-hint">Scrollen zum Zoomen · Ziehen zum Bewegen · Flughafen anklicken</div><div id="mapTooltip" role="status" class="map-tooltip" hidden></div></div>
+      <div class="map-footer"><div class="legend"><span><i class="legend-line"></i> Direkt</span><span><i class="legend-line dashed"></i> Umstieg</span><span><i class="legend-point"></i> Flughafen</span></div><div class="map-source">Eigene Molliland-Karte · geografisch schematisch</div></div>
+      <div id="detailPanel" class="detail-panel" hidden></div>
+    </section>
+  </main>
+  <div id="modal" class="modal-backdrop" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-top"><h2 id="modalTitle">Über diese Website</h2><button id="modalClose" class="square-btn" title="Schließen">×</button></div><div id="modalBody"></div></div></div>
+  <noscript>Bitte aktiviere JavaScript, um den interaktiven Streckenplan zu verwenden.</noscript>
+  <script src="data.js"></script><script src="logic.js"></script><script src="app.js"></script>
+</body>
+</html>
