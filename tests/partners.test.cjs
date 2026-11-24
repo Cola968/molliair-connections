@@ -24,7 +24,7 @@ test('only partner options filter does not offer all-ARG journeys',()=>{
  assert.ok(results.every(it=>it.legs.some(l=>!['ML','MC'].includes(l.carrier))));
 });
 
-test('default core search stays restricted to the Molliair group',()=>{
+test('default core search stays restricted to the Molliair group on a Monday without own Boston service',()=>{
  const results=core.search(data,'MOL','BOS','2027-05-17',{maxStops:0});
  assert.equal(results.length,0);
 });

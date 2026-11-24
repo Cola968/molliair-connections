@@ -3,7 +3,7 @@
 const airports=[
  ['MOL','Mollicity','Molliland',628,375,1600000],['MBG','Molliburg','Molliland',514,338,120000],['MHH','Mollihausen','Molliland',666,309,62000],['MHF','Mollihafen','Molliland',556,463,38000],
  ['STC','Stachelcity','Stachelland',955,238,800000],['MST','Miastadt','Mialand',1002,514,19000],
- ['MIA','Miami','USA',164,227,0],['BOS','Boston','USA',208,156,0],['YYZ','Toronto','Kanada',146,129,0],
+ ['JFK','New York-JFK','USA',169,177,0],['IAD','Washington-Dulles','USA',115,193,0],['MIA','Miami','USA',164,227,0],['BOS','Boston','USA',208,156,0],['YYZ','Toronto','Kanada',146,129,0],
  ['BEL','Belém','Brasilien',224,453,0],['GRU','São Paulo','Brasilien',231,578,0],['FOR','Fortaleza','Brasilien',290,501,0],['REC','Recife','Brasilien',306,545,0],
  ['TNR','Antananarivo','Madagaskar',292,655,0],['CCS','Caracas','Venezuela',153,386,0],['PTY','Panama-Stadt','Panama',127,429,0],['BGI','Bridgetown','Barbados',278,372,0],['POS','Port of Spain','Trinidad und Tobago',250,399,0],['KIN','Kingston','Jamaika',148,333,0],['GEO','Georgetown','Guyana',229,429,0]
 ].map(([code,name,country,x,y,pop])=>({code,name,country,x,y,pop}));
@@ -54,6 +54,21 @@ const routes=[
  {id:'sc-mhf-bgi',from:'MHF',to:'BGI',carrier:'SC',byYear:{2026:2,2027:2,2030:2},aircraft:'Dornier 228',seats:19,depart:'10:15',returnDepart:'06:20',duration:220,days:['Sa','So'],seasonal:true},
  {id:'ml-mbg-ccs',from:'MBG',to:'CCS',carrier:'ML',byYear:{2026:0,2027:0,2030:1},aircraft:'E190-E2',seats:106,depart:'10:35',returnDepart:'06:25',duration:240,days:['Sa'],seasonal:true}
 ];
+const week=['Mo','Di','Mi','Do','Fr','Sa','So'];
+const s27={
+ 'mol-mbg':{frequency:21,rotations:[{depart:'20:30',returnDepart:'07:55',returnDayOffset:1},{depart:'10:30',returnDepart:'12:00',returnDayOffset:0},{depart:'14:30',returnDepart:'16:00',returnDayOffset:0}]},
+ 'mol-mst':{frequency:4,days:['Mo','Mi','Fr','So'],depart:'10:50',returnDepart:'12:10'},
+ 'mol-mia':{frequency:14,rotations:[{depart:'11:00',returnDepart:'13:20',returnDayOffset:1},{depart:'18:40',returnDepart:'05:00',returnDayOffset:1}]},
+ 'mol-bel':{frequency:4,days:['Mo','Mi','Fr','So'],depart:'15:20',returnDepart:'13:50'},
+ 'mol-tnr':{frequency:3,days:['Di','Do','Sa']}
+};
+for(const r of routes){const p=s27[r.id];if(p){r.byYear[2027]=p.frequency;const {frequency,...schedule}=p;r.scheduleByYear={2027:schedule};}}
+for(const [id,from,to,frequency,days,depart,returnDepart,duration,seasonal] of [
+ ['mol-jfk','MOL','JFK',4,['Mo','Mi','Fr','So'],'14:50','10:45',320,false],
+ ['mol-bos','MOL','BOS',3,['Di','Do','Sa'],'14:50','10:45',305,false],
+ ['mol-iad','MOL','IAD',3,['Mo','Do','Sa'],'19:00','10:40',315,false],
+ ['mbg-mia','MBG','MIA',1,['Sa'],'10:30','12:00',310,true]
+])routes.push({id,from,to,carrier:'ML',byYear:{2026:0,2027:frequency,2030:frequency},aircraft:'E195-E2',seats:132,days,depart,returnDepart,returnDayOffset:1,duration,seasonal,business:true});
 const data={airports,airlines,routes,years:[2026,2027,2030],weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'],disclaimer:'Molliair Streckennetz und Flugplanübersicht.'};
 root.FLIGHT_DATA=data;if(typeof module!=='undefined'&&module.exports)module.exports=data;
 })(typeof window!=='undefined'?window:globalThis);

@@ -1,3 +1,7 @@
+## Version 3.3 – finaler Sommerflugplan 2027
+
+64 wöchentliche MOL-Abflüge, 65 Flugpaare inklusive saisonalem MBG–MIA (Mai–September). Drei tägliche MBG-Frequenzen, zwei tägliche MIA-Frequenzen, JFK 4/W, BOS 3/W, IAD 3/W. Flugplan ab 28. März 2027; Daten, Preise und Zeiten sind Modellwerte. Hubwellen, Flugtafeln, Buchung, Zielseiten und Newsroom nutzen den aktualisierten Stand. Keine Live-Daten, bestätigten Codeshares oder vollständige Umlaufvalidierung.
+
 ## Version 3.2 — 24. November 2026
 
 - Flight results are sorted chronologically by default, with reverse-time, price, duration and recommended sorting.
@@ -37,7 +41,7 @@ Independent German-language website for Molliair and Molliair City (Molliland av
 - Stachelair Mollicity–Stachelcity: **6 pairs/week**, Monday–Saturday, evening rotation.
 - Mollicity–Mollihausen: **2 pairs/week**, Monday and Friday. Morning outbound 09:55 and return 11:15; the Monday MBG→MOL→MHH connection has a **70-minute layover**.
 - Mollicity–Miastadt: **3 pairs/week**, Monday, Friday and Sunday, morning shuttle.
-- Molliair's published 2027 dataset in this app totals **35 outbound departures/week from MOL** (previously 32). Other routes are carried forward from the accepted project schedule, pending actual confirmation of further ARG expansion.
+- Historical version 3.1 dataset totaled **35 outbound departures/week from MOL** (previously 32). Other routes are carried forward from the accepted project schedule, pending actual confirmation of further ARG expansion.
 - ARG plans **nine aircraft during 2027**, but the exact nine-aircraft tail rotations and any further 2027 departures are *not* documented as already committed in this dataset.
 - Longer international aircraft turns are scheduled on the next service day where appropriate; time zones are simplified across the fictional network.
 

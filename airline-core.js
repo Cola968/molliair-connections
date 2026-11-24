@@ -2,7 +2,7 @@
 'use strict';
 const logic=(typeof require==='function'&&typeof module!=='undefined'&&module.exports)?require('./logic.js'):root.RouteLogic;
 const DAYS=['So','Mo','Di','Mi','Do','Fr','Sa'];
-const PRICES={'mol-mbg':54,'mol-mhh':49,'mol-stc':85,'mol-mst':77,'mol-mia':239,'mol-bel':189,'mol-tnr':162,'mol-ccs':149,'mol-geo':179,'mol-pty':179,'ml-mbg-ccs':192};
+const PRICES={'mol-mbg':54,'mol-mhh':49,'mol-stc':85,'mol-mst':77,'mol-mia':239,'mol-jfk':269,'mol-bos':249,'mol-iad':259,'mbg-mia':249,'mol-bel':189,'mol-tnr':162,'mol-ccs':149,'mol-geo':179,'mol-pty':179,'ml-mbg-ccs':192};
 const FARES={LIGHT:{label:'LIGHT',extra:0,cabin:8,checked:0,change:'Gegen Gebühr',seat:false},CLASSIC:{label:'CLASSIC',extra:39,cabin:8,checked:23,change:'Gegen Gebühr',seat:false},FLEX:{label:'FLEX',extra:89,cabin:12,checked:23,change:'Kostenlos',seat:true},BUSINESS:{label:'BUSINESS',extra:199,cabin:12,checked:32,change:'Kostenlos',seat:true}};
 const ISO=/^\d{4}-\d{2}-\d{2}$/;
 function parseDay(s){if(typeof s!=='string'||!ISO.test(s))return null;const d=new Date(s+'T12:00:00Z');if(!Number.isFinite(d.getTime())||d.toISOString().slice(0,10)!==s)return null;return d;}
@@ -16,7 +16,7 @@ function plannedDurationDelta(f,s){
 }
 function dateFlights(data,s,{includeOtherAirlines=false}={}){
  const d=parseDay(s);if(!d||d.getUTCFullYear()>2030||d.getUTCFullYear()<2026)return[];
- const flights=logic.flightsFor(data,{year:d.getUTCFullYear()===2026?2026:d.getUTCFullYear()>=2030?2030:2027,day:DAYS[d.getUTCDay()],month:d.getUTCMonth()+1,...(includeOtherAirlines?{}:{airlines:['ML','MC']})});
+ const flights=logic.flightsFor(data,{year:d.getUTCFullYear()===2026||(d.getUTCFullYear()===2027&&s<'2027-03-28')?2026:d.getUTCFullYear()>=2030?2030:2027,day:DAYS[d.getUTCDay()],month:d.getUTCMonth()+1,...(includeOtherAirlines?{}:{airlines:['ML','MC']})});
  return flights.map(f=>{
   const duration=f.duration+plannedDurationDelta(f,s),arriveMinute=f.departMinute+duration;
   return {...f,duration,arriveMinute,arrive:logic.fmtTime(arriveMinute)};

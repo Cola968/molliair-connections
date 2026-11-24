@@ -56,3 +56,5 @@ h1,h2,h3,h4{font-family:Manrope,var(--font);letter-spacing:-.025em;font-weight:7
 @media(max-width:360px){.result-card-v32 .time-point strong{font-size:20px}.result-card-v32 .flight-line{min-width:43px}.result-card-v32 .time-point{min-width:45px}.flight-modal-top h2{font-size:17px}.flight-modal-actions .btn{font-size:10px;padding:8px 10px}}
 @media(max-width:680px){.result-controls-v32>label:first-child{flex:1 1 0!important;width:auto!important;min-width:0!important}.result-controls-v32>label:first-child select{max-width:100%!important;width:100%!important}.result-controls-v32 .result-filter-menu{flex:0 0 auto!important}}
 @media(max-width:370px){.results-shell .stepper{gap:1px;max-width:100%}.results-shell .step{min-width:0;gap:2px;font-size:8px;letter-spacing:-.03em}.results-shell .step b{flex:0 0 16px;width:16px;height:16px;font-size:8px}}
+/* New USA destinations: neutral editorial artwork-free cards. */
+.destination-card.dest-usa-new{background:linear-gradient(150deg,#1d3b50,#10273a 65%,#182f3e);}
