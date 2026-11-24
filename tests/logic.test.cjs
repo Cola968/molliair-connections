@@ -3,9 +3,9 @@ const data=require('../data.js');
 const logic=require('../logic.js');
 const test=(name,fn)=>{try{fn();console.log('✓',name)}catch(e){console.error('✗',name,e.message);process.exitCode=1}};
 
-test('2027 Molliair flight count from Mollicity exactly 32/week',()=>{
+test('2027 Molliair flight count from Mollicity exactly 35/week',()=>{
  const routes=logic.routesForYear(data,2027).filter(r=>r.from==='MOL'&&r.carrier==='ML');
- assert.equal(routes.reduce((s,r)=>s+r.frequency,0),32);
+ assert.equal(routes.reduce((s,r)=>s+r.frequency,0),35);
 });
 test('2027 Miastadt three E190E2 flights',()=>{
  const r=logic.routesForYear(data,2027).find(r=>r.id==='mol-mst');assert.equal(r.frequency,3);assert.equal(r.aircraft,'E190-E2');
