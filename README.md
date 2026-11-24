@@ -1,66 +1,45 @@
-# Molliair | Airline Passenger Website
+# Molliair — Airline Website 3.0
 
-Responsive, browser-based airline passenger experience for **Molliair**, **Molliair City** and **Aurelia Regional Group (ARG)**.
+Independent German-language website for Molliair and Molliair City (Molliland aviation simulation).
 
-## Live site
+**Live:** https://cola968.github.io/molliair-connections/
 
-https://cola968.github.io/molliair-connections/
+## Interface refresh (3.0)
 
-## Features
+- Simplified airline layout: compact top navigation, direct booking form, restrained destination offers and clearer customer-service entry points.
+- Responsive flight results with seven-day price calendar, carrier filter, stop filter, sorting, operators by segment, and expandable flight details.
+- By default, long layovers/overnight itineraries are hidden behind an explicit disclosure control, rather than cluttering the results.
+- One-way/round-trip booking preview: flight, fare, traveler details, extras/seat choice (group-owned flights only), itinerary review and browser-local journey reference.
+- Service pages: local journey management, check-in simulation, planned flight status, baggage, fleet, route map, company information and contact help.
+- UX patterns researched from airBaltic and Lufthansa; Lumen UI semantic spacing and accessible form guidelines used as design reference. Original implementation and branding, no imported airline trademarks or code.
 
-- Airline homepage with hero, destination offers and booking widget.
-- Departure/arrival airport lookup, travel dates, round trip/one way, adults/children/infants.
-- Search routes by calendar date against an explicit weekday schedule; direct flights and chronological one- or two-stop connections, including long transfers (up to 24 hours per connection) and next-day departures.
-- Price-by-day date strip, connection filters (direct / at most one / all), sorting, expandable flight-leg timeline, layover alerts, and suggestions for the next four available travel dates.
-- Other-airline search across scheduled Stachelair, Copa, American, LATAM, Azul, Air Canada, Caribbean Airlines and additional network operators, with airline-scope filter (all / Molliair group / includes other carriers), clear operator names per leg, and visible partner restrictions.
-- Side-by-side LIGHT, CLASSIC, FLEX, and eligible BUSINESS fares.
-- Traveler details, fare changes, baggage, priority, meals, seat map, running fare totals and journey review.
-- Browser-local journey plan, reference lookup, updates/cancellation, simulated check-in window and printable itinerary.
-- Planned flight times by flight number and day (not live position or operational data).
-- 2026, 2027 and 2030 route map, airline filters and interactive airport pin list.
-- Destinations, offer pages, fleet, Molliair City, baggage, club profile, newsroom, FAQs and legal information.
-- Responsive at mobile and desktop widths, keyboard navigation and form validation.
+## Summer 2027 timetable
 
-## Hub-banking project note
+- Mollicity–Molliburg (MBG): **10 round trips/week**. One daily pair plus a second Monday, Wednesday and Friday.
+- Mollicity–Stachelcity (Molliair): **6 pairs/week**, Monday–Friday and Sunday.
+- Stachelair Mollicity–Stachelcity: **6 pairs/week**, Monday–Saturday, evening rotation.
+- Mollicity–Mollihausen: **2 pairs/week**, Monday and Friday. Morning outbound 09:55 and return 11:15; the Monday MBG→MOL→MHH connection has a **70-minute layover**.
+- Mollicity–Miastadt: **3 pairs/week**, Monday, Friday and Sunday, morning shuttle.
+- Molliair's published 2027 dataset in this app totals **35 outbound departures/week from MOL** (previously 32). Other routes are carried forward from the accepted project schedule, pending actual confirmation of further ARG expansion.
+- ARG plans **nine aircraft during 2027**, but the exact nine-aircraft tail rotations and any further 2027 departures are *not* documented as already committed in this dataset.
+- Longer international aircraft turns are scheduled on the next service day where appropriate; time zones are simplified across the fictional network.
 
-The 2030 inbound/outbound hub wave timings are a separate **draft** and have **not** replaced the current 2027 timetable in `data.js`. In particular, the Monday MBG→MOL→MHH connection still has a long layover under the existing schedule. Do not silently claim that the improved timetable is already in production before tail rotations and service-day patterns are approved.
+## Important limitations
 
-## Important boundary
+This is an interactive airline booking preview using a made-up route system, not a real-world airline reservation engine. It **does not issue tickets, collect payments, access a real airline inventory, or supply live operational flight status**. Prices and flight numbers are examples. A stored booking code refers to a journey saved in this browser only. Partner routes appear in searches, but joint ticketing/codeshare, through-checked baggage and protected connections are **not** assumed unless actually agreed. The booking review communicates these boundaries to travelers.
 
-This site is an airline website concept with an interactive booking preview; it does **not** process real payments, create real airline reservations, issue tickets or supply real-time flight status. Example prices and flight plans are drawn from the Molliair project dataset and the operational plan is not fully tail-assigned. Partner-airline options are indicative mixed-operator itineraries, **not** proof of any existing codeshare, interline agreement, through-ticket availability, baggage transfer or partner fare inventory. Their prices are example calculations, partner seating is not offered and ticket/fare rules require verification. Long stopovers are labeled clearly and are not independently verified for protected same-ticket transfer, airport overnight access, or luggage through-checking. The final checkout step communicates the limitation to the traveler.
+## Run
 
-## Development
+Static HTML, CSS and JavaScript. Serve the folder with `python3 -m http.server 8844`. No application build is needed. Run tests with `npm test` (Node 18+). Test browser responsiveness with Playwright.
 
-Static HTML/CSS/JavaScript with no build chain. Run a local static server:
+## Files
 
-```bash
-python3 -m http.server 8844
-```
+- `index.html` — shell/navigation
+- `professional.css` — updated layout and component styling; overrides legacy `airline.css` to preserve secondary page functionality
+- `airline.js` — responsive booking pages and UI interaction
+- `airline-core.js` — date search, chronological routing, fare quotes
+- `data.js`, `logic.js` — route frequencies, operating weekdays and flight times
+- `tests/` — regression coverage for routing, connections, partner airlines and updated summer 2027 service
+- `aircraft.svg`, `favicon.svg` — original illustrative brand assets
 
-Then open `http://localhost:8844/`.
-
-Tests (Node.js >= 18):
-
-```bash
-npm test
-```
-
-Run browser checks using a Playwright browser where available (the local tests here are separate from production assets).
-
-## Structure
-
-- `index.html` — document structure, navigation and footer
-- `airline.css` — responsive visual design
-- `airline.js` — pages and booking workflow
-- `airline-core.js` — deterministic date search, itineraries and fare calculations
-- `data.js`, `logic.js` — Molliair project airports, airlines and frequency data
-- `aircraft.svg`, `favicon.svg` — original Molliair vector artwork
-- `tests/` — regression tests for schedule, route connections and pricing
-
-## Visual sources
-
-Independent photography from Unsplash is referenced remotely as supporting website artwork. The airBaltic/Lufthansa sites were researched as UX references; no third-party site code, trademarks or design assets were duplicated.
-
-## Network-model boundaries
-
-Molliair 2027 routes are built from the 32 weekly departures from Mollicity. Evening international arrivals are aligned with regional outbound connections at the route-search level. This does not claim full operational crew/aircraft rotation feasibility.
+Photo-backed cards reference Unsplash images. Remote photos may be unavailable in browsers with external media blocking; layout stays functional with fallback colors.
