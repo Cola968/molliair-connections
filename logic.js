@@ -12,15 +12,16 @@ const makeDays=(r,count)=>{
  let i=0;while(out.length<count)out.push(extra[i++%extra.length]);
  return out;
 };
-function routesForYear(data,year){return data.routes.filter(r=>(r.byYear[year]||0)>0).map(r=>({ ...r,frequency:r.byYear[year],daysActive:makeDays(r,r.byYear[year]),carrier:(year>=2030&&r.operatedBy2030)||r.carrier}));}
+function routesForYear(data,year){return data.routes.filter(r=>(r.byYear[year]||0)>0).map(r=>{const s={...r,...(r.scheduleByYear?.[year]||{})};return {...s,frequency:r.byYear[year],daysActive:s.rotations?s.rotations.flatMap(()=>s.days):makeDays(s,r.byYear[year]),carrier:(year>=2030&&r.operatedBy2030)||r.carrier};});}
 function expandFlights(routes,data){const out=[];
  for(const r of routes){r.daysActive.forEach((day,n)=>{
   const isExtra=n>=r.days.length&&r.extraDays?.includes(day);
-  const dep=isExtra?r.extraDepart:r.depart;
-  const ret=isExtra?r.extraReturnDepart:r.returnDepart;
-  const returnDay=days[(days.indexOf(day)+(r.returnDayOffset||0))%7];
+  const rotation=r.rotations?.[Math.floor(n/r.days.length)];
+  const dep=rotation?.depart||(isExtra?r.extraDepart:r.depart);
+  const ret=rotation?.returnDepart||(isExtra?r.extraReturnDepart:r.returnDepart);
+  const returnDay=days[(days.indexOf(day)+(rotation?.returnDayOffset??r.returnDayOffset??0))%7];
   const base={routeId:r.id,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration};
-  const no=101+data.routes.findIndex(x=>x.id===r.id)*20+n*2;
+  const idx=data.routes.findIndex(x=>x.id===r.id);const no=n<10?101+idx*20+n*2:1001+idx*100+n*2;
   out.push({...base,id:r.id+'-o-'+n,from:r.from,to:r.to,depart:dep,departMinute:asMin(dep),arrive:fmtTime(asMin(dep)+r.duration),arriveMinute:asMin(dep)+r.duration,flightNo:r.carrier+no});
   out.push({...base,day:returnDay,id:r.id+'-i-'+n,from:r.to,to:r.from,depart:ret,departMinute:asMin(ret),arrive:fmtTime(asMin(ret)+r.duration),arriveMinute:asMin(ret)+r.duration,flightNo:r.carrier+(no+1)});
  });}return out;
