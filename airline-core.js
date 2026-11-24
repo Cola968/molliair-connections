@@ -8,7 +8,20 @@ const ISO=/^\d{4}-\d{2}-\d{2}$/;
 function parseDay(s){if(typeof s!=='string'||!ISO.test(s))return null;const d=new Date(s+'T12:00:00Z');if(!Number.isFinite(d.getTime())||d.toISOString().slice(0,10)!==s)return null;return d;}
 const dateDay=s=>{const d=parseDay(s);return d?DAYS[d.getUTCDay()]:null};
 function networkFlights(data,year){return logic.flightsFor(data,{year});}
-function dateFlights(data,s,{includeOtherAirlines=false}={}){const d=parseDay(s);if(!d||d.getUTCFullYear()>2030||d.getUTCFullYear()<2026)return[];return logic.flightsFor(data,{year:d.getUTCFullYear()===2026?2026:d.getUTCFullYear()>=2030?2030:2027,day:DAYS[d.getUTCDay()],month:d.getUTCMonth()+1,...(includeOtherAirlines?{}:{airlines:['ML','MC']})});}
+/* Stable per-date timetable variation, not random realtime weather/delay data. */
+function plannedDurationDelta(f,s){
+ let hash=0;for(const char of `${f.routeId}:${f.id}`)hash=(hash*31+char.charCodeAt(0))%997;
+ const ordinal=Math.floor(Date.parse(s+'T00:00:00Z')/86400000);
+ return (ordinal*5+hash*7)%9-4;
+}
+function dateFlights(data,s,{includeOtherAirlines=false}={}){
+ const d=parseDay(s);if(!d||d.getUTCFullYear()>2030||d.getUTCFullYear()<2026)return[];
+ const flights=logic.flightsFor(data,{year:d.getUTCFullYear()===2026?2026:d.getUTCFullYear()>=2030?2030:2027,day:DAYS[d.getUTCDay()],month:d.getUTCMonth()+1,...(includeOtherAirlines?{}:{airlines:['ML','MC']})});
+ return flights.map(f=>{
+  const duration=f.duration+plannedDurationDelta(f,s),arriveMinute=f.departMinute+duration;
+  return {...f,duration,arriveMinute,arrive:logic.fmtTime(arriveMinute)};
+ });
+}
 function numericPrice(legs,date){const d=parseDay(date);if(!d)return 0;const day=d.getUTCDate(),month=d.getUTCMonth();const fluct=1+(((day*7+month*11)%13)-6)*0.017;return Math.round(legs.reduce((s,l)=>s+(PRICES[l.routeId]||129),0)*fluct);}
 function toItinerary(legs,date,airlineNames){
  const operators=[...new Set(legs.map(l=>airlineNames.get(l.carrier)||l.carrier))];
