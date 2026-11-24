@@ -7,15 +7,24 @@ const makeDays=(r,count)=>{
  if(!count)return[];
  const base=r.days.slice();
  if(count<=base.length)return base.slice(0,count);
- let out=base.slice();for(const d of days){if(out.length>=Math.min(count,7))break;if(!out.includes(d))out.push(d)}
- let i=0;while(out.length<count){out.push(['Mo','Fr','So','Mi','Sa','Di','Do'][i++%7]);}
+ const out=base.slice();
+ const extra=r.extraDays?.length?r.extraDays:['Mo','Fr','So','Mi','Sa','Di','Do'];
+ let i=0;while(out.length<count)out.push(extra[i++%extra.length]);
  return out;
 };
 function routesForYear(data,year){return data.routes.filter(r=>(r.byYear[year]||0)>0).map(r=>({ ...r,frequency:r.byYear[year],daysActive:makeDays(r,r.byYear[year]),carrier:(year>=2030&&r.operatedBy2030)||r.carrier}));}
-function expandFlights(routes,data){const out=[];for(const r of routes){r.daysActive.forEach((day,n)=>{let seq=String(n+1).padStart(2,'0');
- out.push({id:r.id+'-o-'+n,routeId:r.id,from:r.from,to:r.to,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration,depart:r.depart,departMinute:asMin(r.depart),arrive:fmtTime(asMin(r.depart)+r.duration),arriveMinute:asMin(r.depart)+r.duration,flightNo:r.carrier+(101+data.routes.findIndex(x=>x.id===r.id)*20+n*2)});
- out.push({id:r.id+'-i-'+n,routeId:r.id,from:r.to,to:r.from,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration,depart:r.returnDepart,departMinute:asMin(r.returnDepart),arrive:fmtTime(asMin(r.returnDepart)+r.duration),arriveMinute:asMin(r.returnDepart)+r.duration,flightNo:r.carrier+(102+data.routes.findIndex(x=>x.id===r.id)*20+n*2)});
- });}return out;}
+function expandFlights(routes,data){const out=[];
+ for(const r of routes){r.daysActive.forEach((day,n)=>{
+  const isExtra=n>=r.days.length&&r.extraDays?.includes(day);
+  const dep=isExtra?r.extraDepart:r.depart;
+  const ret=isExtra?r.extraReturnDepart:r.returnDepart;
+  const returnDay=days[(days.indexOf(day)+(r.returnDayOffset||0))%7];
+  const base={routeId:r.id,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration};
+  const no=101+data.routes.findIndex(x=>x.id===r.id)*20+n*2;
+  out.push({...base,id:r.id+'-o-'+n,from:r.from,to:r.to,depart:dep,departMinute:asMin(dep),arrive:fmtTime(asMin(dep)+r.duration),arriveMinute:asMin(dep)+r.duration,flightNo:r.carrier+no});
+  out.push({...base,day:returnDay,id:r.id+'-i-'+n,from:r.to,to:r.from,depart:ret,departMinute:asMin(ret),arrive:fmtTime(asMin(ret)+r.duration),arriveMinute:asMin(ret)+r.duration,flightNo:r.carrier+(no+1)});
+ });}return out;
+}
 const routeClass=(data,carrier)=>data.airlines.find(x=>x.id===carrier)?.group||'Andere';
 function flightsFor(data,opts={}){
  const year=+opts.year||2027,month=+opts.month||0;
