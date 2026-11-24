@@ -49,7 +49,7 @@ function scheduledFlights(data,date,offset,includeOtherAirlines=false){
    arriveDate:dateShift(date,Math.floor(arriveMinute/1440)),departMinute,arriveMinute};
  });
 }
-function search(data,from,to,date,{maxStops=2,sort='recommended',maxLayoverMinutes=1440,airlineScope='arg'}={}){
+function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg'}={}){
  if(!parseDay(date)||!data.airports.some(a=>a.code===from)||!data.airports.some(a=>a.code===to)||from===to)return [];
  const maxLegs=Math.min(3,Math.max(1,Number(maxStops)+1));
  const includeOtherAirlines=airlineScope==='all'||airlineScope==='partner';
@@ -78,7 +78,8 @@ function search(data,from,to,date,{maxStops=2,sort='recommended',maxLayoverMinut
  for(const first of firstFlights)explore([first],new Set([from,first.to]));
  const comparators={
   price:(a,b)=>a.price-b.price||a.minutes-b.minutes,
-  time:(a,b)=>a.legs[0].departMinute-b.legs[0].departMinute||a.minutes-b.minutes,
+  time:(a,b)=>a.legs[0].departMinute-b.legs[0].departMinute||a.minutes-b.minutes||a.price-b.price,
+  latest:(a,b)=>b.legs[0].departMinute-a.legs[0].departMinute||a.minutes-b.minutes||a.price-b.price,
   duration:(a,b)=>a.minutes-b.minutes||a.price-b.price,
   recommended:(a,b)=>a.stops-b.stops||a.minutes-b.minutes||a.price-b.price
  };
