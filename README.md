@@ -4,6 +4,14 @@ Independent German-language website for Molliair and Molliair City (Molliland av
 
 **Live:** https://cola968.github.io/molliair-connections/
 
+## Version 3.1 – compact itinerary and flight times
+
+- Departure, arrival, flight duration, date, airport code and flight number shown together for outbound and return flights.
+- Traveler, fare and extra-service details folded into an accessible disclosure on itinerary review; total price remains visible.
+- Example planned flight durations change by at most four minutes between service dates, deterministically, without changing on rerender. This is not live delay or weather data.
+- Flight status and itinerary search share the same dated flight arrival times. Previously saved local trip snapshots remain unchanged.
+- Reviewed with Playwright at 320px, 390px and desktop widths.
+
 ## Interface refresh (3.0)
 
 - Simplified airline layout: compact top navigation, direct booking form, restrained destination offers and clearer customer-service entry points.
