@@ -1,0 +1,6 @@
+const test=require('node:test');const assert=require('node:assert/strict');
+const news=require('../newsroom.js');
+test('news index links to the expansion, US offensive and press conference',()=>{const html=news.render();for(const id of ['molliburg-2027','usa-offensive','arg-pressekonferenz'])assert.ok(html.includes('#/news/'+id));});
+test('expansion release preserves frequencies, market decline and hub strategy',()=>{const html=news.render('molliburg-2027');for(const value of ['21','33','14','Miami','Mollicity','saisonal'])assert.ok(html.includes(value));});
+test('US expansion names three new destinations and distinguishes MBG seasonal service',()=>{const html=news.render('usa-offensive');for(const value of ['New York-JFK','Boston','Washington-Dulles','Molliburg','Miami'])assert.ok(html.includes(value));});
+test('unknown news article returns safe index, not raw user input',()=>{const html=news.render('<script>alert(1)</script>');assert.ok(html.includes('molliburg-2027'));assert.ok(!html.includes('<script>'));});
