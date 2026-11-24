@@ -1,3 +1,12 @@
+## Version 3.2 — 24. November 2026
+
+- Flight results are sorted chronologically by default, with reverse-time, price, duration and recommended sorting.
+- Dense, mobile-first results with a compact sorting/filter toolbar, airline, flight number, times, duration, connections and price.
+- Flight details appear in a responsive modal (bottom sheet on mobile) with leg-by-leg date, planned times, operating airline, aircraft, connection durations, baggage and price.
+- Top-of-screen actionable in-app notifications, notification center, and a locally persistent saved-flight watchlist.
+- Notifications are triggered by interactions (saving itineraries or bookmarking flights). There is **no live flight status push feed** and **no claim of real gate or delay events**. Watchlist data stays in the browser.
+- Browser verified at 320, 390 and 1440 px; trip selection through tariff/passenger page tested.
+
 # Molliair — Airline Website 3.0
 
 Independent German-language website for Molliair and Molliair City (Molliland aviation simulation).
