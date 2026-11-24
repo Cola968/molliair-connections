@@ -3,13 +3,13 @@ const assert=require('node:assert/strict');
 const data=require('../data.js');
 const core=require('../airline-core.js');
 
-test('Molliburg → Mollihausen finds the Monday connection via Mollicity despite 13h stopover',()=>{
+test('Molliburg → Mollihausen finds the Monday connection via Mollicity with 70-minute transfer',()=>{
   const r=core.search(data,'MBG','MHH','2027-05-17');
   assert.ok(r.some(i=>i.stops===1&&i.via==='MOL'),'Expected MBG→MOL→MHH on Monday');
   const c=r.find(i=>i.stops===1&&i.via==='MOL');
-  assert.equal(c.legs[0].arrive,'07:10');
-  assert.equal(c.legs[1].depart,'20:25');
-  assert.equal(c.legs[1].departMinute-c.legs[0].arriveMinute,795);
+  assert.equal(c.legs[0].arrive,'08:45');
+  assert.equal(c.legs[1].depart,'09:55');
+  assert.equal(c.legs[1].departMinute-c.legs[0].arriveMinute,70);
 });
 
 test('Mollihausen → Molliburg finds reverse via Mollicity on Friday',()=>{
