@@ -45,12 +45,13 @@ function fleet(all){
   if(!t){t={id:'SIM-'+String(tails.length+1).padStart(2,'0'),type:f.aircraft,initial:f.from,airport:f.from,ready:-Infinity,legs:[]};tails.push(t);}
   const prev=t.legs.at(-1);t.legs.push({...f,ground:prev?f.dep-prev.arr:null});t.airport=f.to;t.ready=f.arr+turn(f.aircraft);
  }
- return tails.map(t=>({...t,block:t.legs.reduce((s,f)=>s+f.duration,0),last:t.airport}));
+ return tails.map(t=>({...t,block:t.legs.reduce((s,f)=>s+f.duration,0),last:t.airport,nights:Array.from({length:7},(_,i)=>{const end=(i+1)*DAY,air=t.legs.find(f=>f.dep<end&&f.arr>end),prior=t.legs.filter(f=>f.arr<=end).at(-1);return air?'In der Luft ('+air.flightNo+')':prior?prior.to:t.initial;})}));
 }
 function validate(data,all,tails,limit=8){
  const issues=[],week=all.filter(f=>f.dep>=0&&f.dep<7*DAY),ids=new Set(),push=(code,message)=>issues.push({code,message});
  for(const f of week){const k=f.date+'|'+f.flightNo;if(ids.has(k))push('DUPLICATE','Doppelte Flugnummer: '+k);ids.add(k);if(!/^[A-Z0-9]{2}[0-9]+$/.test(f.flightNo)||f.arr<=f.dep||!data.airports.some(a=>a.code===f.from)||!data.airports.some(a=>a.code===f.to)||f.from===f.to)push('INVALID','Ungültiger Flug: '+f.flightNo);}
- for(const t of tails){for(let i=1;i<t.legs.length;i++){const a=t.legs[i-1],b=t.legs[i];if(a.to!==b.from||b.dep-a.arr<turn(t.type))push('TURN',t.id+': '+a.flightNo+' / '+b.flightNo);}}
+ const assigned=new Set();for(const t of tails){for(const f of t.legs){if(assigned.has(f.key))push('DOUBLE_ASSIGNMENT','Flug mehrfach zugeteilt: '+f.flightNo+' '+f.date);assigned.add(f.key);if(t.type!==f.aircraft)push('TYPE','Falscher Flugzeugtyp: '+t.id+' '+f.flightNo);}for(let i=1;i<t.legs.length;i++){const a=t.legs[i-1],b=t.legs[i];if(a.to!==b.from||b.dep-a.arr<turn(t.type))push('TURN',t.id+': '+a.flightNo+' / '+b.flightNo);}}
+ for(const f of week.filter(isOwn))if(!assigned.has(f.key))push('UNASSIGNED','Kein Flugzeug: '+f.flightNo+' '+f.date);
  if(tails.length>limit)push('FLEET','Kandidatenumlauf benötigt '+tails.length+' aktive Maschinen; verfügbar: '+limit+' (plus 1 Reserve).');
  const slots=week.filter(f=>f.from==='MOL'&&f.to==='STC');for(const carrier of ['ML','SA'])if(slots.filter(f=>f.carrier===carrier).length>7)push('SLOTS',carrier+': mehr als 7 MOL–STC-Abflüge.');
  for(const f of slots.filter(f=>f.carrier!=='ML'&&new Date(f.date+'T12:00:00Z').getUTCDay()===0))push('SUNDAY','Sonntags-Exklusivität verletzt: '+f.flightNo);
