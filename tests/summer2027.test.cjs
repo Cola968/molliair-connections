@@ -16,11 +16,11 @@ test('regional return from MHH connects to afternoon JFK service',()=>{
  const paths=core.search(data,'MHH','JFK','2027-05-17',{maxStops:1});
  assert.ok(paths.some(x=>x.connectionMinutes[0]>=45&&x.connectionMinutes[0]<=240));
 });
-test('Stachelair morning service and six flights each for STC airlines',()=>{
+test('Stachelair morning and afternoon service and six flights each for STC airlines',()=>{
  let ml=logic.flightsFor(data,{year:2027,airlines:['ML']}).filter(x=>x.routeId==='mol-stc'&&x.from==='MOL');
  let sa=logic.flightsFor(data,{year:2027,airlines:['SA']}).filter(x=>x.routeId==='sa-mol-stc'&&x.from==='MOL');
  assert.equal(ml.length,6);assert.equal(sa.length,6);
- assert.ok(sa.every(x=>x.depart==='11:45'));
+ assert.ok(sa.every(x=>['10:45','15:00'].includes(x.depart)));
  assert.equal(fl('2027-05-22').filter(x=>x.routeId==='mol-stc'&&x.from==='MOL').length,0);
  assert.equal(core.dateFlights(data,'2027-05-23',{includeOtherAirlines:true}).filter(x=>x.routeId==='sa-mol-stc'&&x.from==='MOL').length,0);
 });
@@ -29,7 +29,7 @@ test('Monday has four MBG rotations and totals 74 own weekly hub departures',()=
  const own=all.filter(x=>x.from==='MOL');
  assert.equal(own.length,74);
  const monday=fl('2027-05-17').filter(x=>x.routeId==='mol-mbg'&&x.from==='MOL');
- assert.deepEqual(monday.map(f=>f.depart).sort(),['10:20','14:45','16:15','20:30']);
+ assert.deepEqual(monday.map(f=>f.depart).sort(),['10:15','15:00','16:15','20:15']);
 });
 test('partner itineraries remain selectable, no fake booking agreement',()=>{
  const paths=core.search(data,'MBG','PTY','2027-05-17',{maxStops:2,airlineScope:'all'});

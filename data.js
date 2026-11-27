@@ -86,8 +86,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "20:30",
-    "returnDepart": "07:55",
+    "depart": "20:15",
+    "returnDepart": "08:10",
     "returnDayOffset": 1
    },
    {
@@ -99,8 +99,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "10:20",
-    "returnDepart": "13:00",
+    "depart": "10:15",
+    "returnDepart": "12:30",
     "returnDayOffset": 0
    },
    {
@@ -124,8 +124,8 @@ const seasonSchedules={
     "days": [
      "Sa"
     ],
-    "depart": "10:20",
-    "returnDepart": "13:00",
+    "depart": "10:15",
+    "returnDepart": "12:30",
     "returnDayOffset": 0,
     "months": [
      3,
@@ -143,8 +143,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "14:45",
-    "returnDepart": "16:35",
+    "depart": "15:00",
+    "returnDepart": "17:25",
     "returnDayOffset": 0
    },
    {
@@ -168,8 +168,8 @@ const seasonSchedules={
      "Mo",
      "Fr"
     ],
-    "depart": "10:10",
-    "returnDepart": "11:55",
+    "depart": "10:15",
+    "returnDepart": "12:55",
     "returnDayOffset": 0
    }
   ],
@@ -181,7 +181,7 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "10:30",
+    "depart": "10:15",
     "returnDepart": "13:00",
     "returnDayOffset": 0
    }
@@ -190,15 +190,29 @@ const seasonSchedules={
    {
     "days": [
      "Mo",
-     "Di",
-     "Mi",
-     "Do",
-     "Fr",
-     "So"
+     "Do"
     ],
     "depart": "20:15",
-    "returnDepart": "07:25",
+    "returnDepart": "07:55",
     "returnDayOffset": 1
+   },
+   {
+    "days": [
+     "Di",
+     "Mi",
+     "Fr"
+    ],
+    "depart": "20:15",
+    "returnDepart": "12:15",
+    "returnDayOffset": 1
+   },
+   {
+    "days": [
+     "So"
+    ],
+    "depart": "10:15",
+    "returnDepart": "12:15",
+    "returnDayOffset": 0
    }
   ],
   "mol-mia": [
@@ -212,8 +226,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "10:30",
-    "returnDepart": "17:10",
+    "depart": "10:15",
+    "returnDepart": "16:55",
     "returnDayOffset": 0
    },
    {
@@ -239,8 +253,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "15:15",
-    "returnDepart": "02:00",
+    "depart": "15:00",
+    "returnDepart": "03:00",
     "returnDayOffset": 1
    }
   ],
@@ -251,8 +265,8 @@ const seasonSchedules={
      "Do",
      "Sa"
     ],
-    "depart": "15:15",
-    "returnDepart": "03:00",
+    "depart": "15:00",
+    "returnDepart": "03:45",
     "returnDayOffset": 1
    }
   ],
@@ -264,7 +278,7 @@ const seasonSchedules={
      "Sa"
     ],
     "depart": "20:15",
-    "returnDepart": "02:30",
+    "returnDepart": "03:30",
     "returnDayOffset": 1
    }
   ],
@@ -277,7 +291,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "15:00",
-    "returnDepart": "03:05",
+    "returnDepart": "04:05",
     "returnDayOffset": 1
    }
   ],
@@ -288,8 +302,8 @@ const seasonSchedules={
      "Do",
      "Sa"
     ],
-    "depart": "10:30",
-    "returnDepart": "15:00",
+    "depart": "10:15",
+    "returnDepart": "16:00",
     "returnDayOffset": 0
    }
   ],
@@ -300,8 +314,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "15:15",
-    "returnDepart": "02:05",
+    "depart": "15:00",
+    "returnDepart": "03:05",
     "returnDayOffset": 1,
     "months": [
      6,
@@ -331,15 +345,22 @@ const seasonSchedules={
   "sa-mol-stc": [
    {
     "days": [
-     "Mo",
-     "Di",
      "Mi",
      "Do",
-     "Fr",
      "Sa"
     ],
-    "depart": "11:45",
-    "returnDepart": "08:15",
+    "depart": "10:45",
+    "returnDepart": "07:45",
+    "returnDayOffset": 0
+   },
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Fr"
+    ],
+    "depart": "15:00",
+    "returnDepart": "12:15",
     "returnDayOffset": 0
    }
   ],
@@ -354,8 +375,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "11:30",
-    "returnDepart": "04:05",
+    "depart": "10:30",
+    "returnDepart": "03:50",
     "returnDayOffset": 0
    }
   ],
@@ -366,8 +387,8 @@ const seasonSchedules={
      "Mi",
      "Fr"
     ],
-    "depart": "15:15",
-    "returnDepart": "07:10",
+    "depart": "15:00",
+    "returnDepart": "08:10",
     "returnDayOffset": 0
    }
   ],
@@ -382,8 +403,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "11:15",
-    "returnDepart": "03:10",
+    "depart": "10:15",
+    "returnDepart": "03:55",
     "returnDayOffset": 0
    }
   ],
@@ -394,8 +415,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "15:35",
-    "returnDepart": "08:10",
+    "depart": "15:05",
+    "returnDepart": "09:10",
     "returnDayOffset": 0
    }
   ],
@@ -407,8 +428,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "11:15",
-    "returnDepart": "05:20",
+    "depart": "10:15",
+    "returnDepart": "04:20",
     "returnDayOffset": 0
    }
   ],
@@ -420,7 +441,7 @@ const seasonSchedules={
      "Sa"
     ],
     "depart": "14:45",
-    "returnDepart": "08:10",
+    "returnDepart": "09:10",
     "returnDayOffset": 0
    }
   ],
@@ -435,7 +456,7 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "11:00",
+    "depart": "10:15",
     "returnDepart": "04:55",
     "returnDayOffset": 0
    }
@@ -447,8 +468,8 @@ const seasonSchedules={
      "Mi",
      "Sa"
     ],
-    "depart": "11:30",
-    "returnDepart": "05:20",
+    "depart": "10:30",
+    "returnDepart": "05:50",
     "returnDayOffset": 0
    }
   ],
@@ -460,7 +481,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "15:00",
-    "returnDepart": "09:00",
+    "returnDepart": "09:50",
     "returnDayOffset": 0
    }
   ],
@@ -472,8 +493,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "11:30",
-    "returnDepart": "04:30",
+    "depart": "10:30",
+    "returnDepart": "03:45",
     "returnDayOffset": 0
    }
   ],
@@ -483,8 +504,8 @@ const seasonSchedules={
      "Di",
      "Sa"
     ],
-    "depart": "11:45",
-    "returnDepart": "05:15",
+    "depart": "10:45",
+    "returnDepart": "06:00",
     "returnDayOffset": 0
    }
   ],
@@ -494,7 +515,7 @@ const seasonSchedules={
      "Di",
      "Sa"
     ],
-    "depart": "11:15",
+    "depart": "12:15",
     "returnDepart": "14:35",
     "returnDayOffset": 0
    }
@@ -502,10 +523,10 @@ const seasonSchedules={
   "sr-mhh-stc": [
    {
     "days": [
-     "Mi"
+     "Fr"
     ],
-    "depart": "11:10",
-    "returnDepart": "16:30",
+    "depart": "12:30",
+    "returnDepart": "09:30",
     "returnDayOffset": 0
    }
   ],
@@ -515,8 +536,8 @@ const seasonSchedules={
      "Di",
      "Sa"
     ],
-    "depart": "10:20",
-    "returnDepart": "16:05",
+    "depart": "11:20",
+    "returnDepart": "08:00",
     "returnDayOffset": 0
    }
   ],
@@ -527,28 +548,28 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "13:40",
-    "returnDepart": "05:25",
+    "depart": "12:40",
+    "returnDepart": "06:25",
     "returnDayOffset": 0
    }
   ],
   "sc-mhh-bgi": [
    {
     "days": [
-     "Sa"
+     "Mo"
     ],
-    "depart": "12:00",
-    "returnDepart": "06:15",
+    "depart": "12:30",
+    "returnDepart": "07:20",
     "returnDayOffset": 0
    }
   ],
   "sc-mhf-bgi": [
    {
     "days": [
-     "Sa",
-     "So"
+     "Di",
+     "Sa"
     ],
-    "depart": "10:15",
+    "depart": "11:15",
     "returnDepart": "06:20",
     "returnDayOffset": 0
    }
@@ -566,7 +587,7 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "20:30",
+    "depart": "19:30",
     "returnDepart": "07:55",
     "returnDayOffset": 1
    },
@@ -580,8 +601,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "10:20",
-    "returnDepart": "13:00",
+    "depart": "10:15",
+    "returnDepart": "12:30",
     "returnDayOffset": 0
    },
    {
@@ -594,7 +615,7 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "14:45",
+    "depart": "15:00",
     "returnDepart": "17:20",
     "returnDayOffset": 0
    }
@@ -606,7 +627,7 @@ const seasonSchedules={
      "Fr"
     ],
     "depart": "10:10",
-    "returnDepart": "11:55",
+    "returnDepart": "12:55",
     "returnDayOffset": 0
    }
   ],
@@ -618,7 +639,7 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "10:30",
+    "depart": "10:15",
     "returnDepart": "13:00",
     "returnDayOffset": 0
    }
@@ -627,15 +648,29 @@ const seasonSchedules={
    {
     "days": [
      "Mo",
-     "Di",
-     "Mi",
      "Do",
-     "Fr",
+     "Fr"
+    ],
+    "depart": "19:30",
+    "returnDepart": "07:40",
+    "returnDayOffset": 1
+   },
+   {
+    "days": [
+     "Di",
+     "Mi"
+    ],
+    "depart": "19:30",
+    "returnDepart": "12:15",
+    "returnDayOffset": 1
+   },
+   {
+    "days": [
      "So"
     ],
-    "depart": "20:15",
-    "returnDepart": "07:25",
-    "returnDayOffset": 1
+    "depart": "10:15",
+    "returnDepart": "12:15",
+    "returnDayOffset": 0
    }
   ],
   "mol-mia": [
@@ -649,7 +684,7 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "10:30",
+    "depart": "10:00",
     "returnDepart": "17:10",
     "returnDayOffset": 0
    },
@@ -659,8 +694,8 @@ const seasonSchedules={
      "Do",
      "Fr"
     ],
-    "depart": "20:15",
-    "returnDepart": "04:00",
+    "depart": "19:30",
+    "returnDepart": "03:45",
     "returnDayOffset": 1
    }
   ],
@@ -672,8 +707,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "15:15",
-    "returnDepart": "02:00",
+    "depart": "15:00",
+    "returnDepart": "03:00",
     "returnDayOffset": 1
    }
   ],
@@ -684,8 +719,8 @@ const seasonSchedules={
      "Do",
      "Sa"
     ],
-    "depart": "15:15",
-    "returnDepart": "03:00",
+    "depart": "15:00",
+    "returnDepart": "03:30",
     "returnDayOffset": 1
    }
   ],
@@ -696,8 +731,8 @@ const seasonSchedules={
      "Do",
      "Sa"
     ],
-    "depart": "20:15",
-    "returnDepart": "02:30",
+    "depart": "19:30",
+    "returnDepart": "03:30",
     "returnDayOffset": 1
    }
   ],
@@ -710,7 +745,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "15:00",
-    "returnDepart": "03:05",
+    "returnDepart": "04:05",
     "returnDayOffset": 1
    }
   ],
@@ -721,23 +756,30 @@ const seasonSchedules={
      "Do",
      "Sa"
     ],
-    "depart": "10:30",
-    "returnDepart": "15:00",
+    "depart": "10:15",
+    "returnDepart": "15:15",
     "returnDayOffset": 0
    }
   ],
   "sa-mol-stc": [
    {
     "days": [
-     "Mo",
-     "Di",
      "Mi",
      "Do",
-     "Fr",
      "Sa"
     ],
-    "depart": "11:45",
-    "returnDepart": "08:15",
+    "depart": "10:45",
+    "returnDepart": "08:00",
+    "returnDayOffset": 0
+   },
+   {
+    "days": [
+     "Di",
+     "Fr",
+     "Mo"
+    ],
+    "depart": "15:00",
+    "returnDepart": "12:15",
     "returnDayOffset": 0
    }
   ],
@@ -752,8 +794,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "11:30",
-    "returnDepart": "04:05",
+    "depart": "10:30",
+    "returnDepart": "03:50",
     "returnDayOffset": 0
    }
   ],
@@ -768,8 +810,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "11:15",
-    "returnDepart": "03:10",
+    "depart": "10:30",
+    "returnDepart": "03:55",
     "returnDayOffset": 0
    }
   ],
@@ -781,8 +823,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "11:15",
-    "returnDepart": "05:20",
+    "depart": "10:15",
+    "returnDepart": "04:20",
     "returnDayOffset": 0
    }
   ],
@@ -794,7 +836,7 @@ const seasonSchedules={
      "Sa"
     ],
     "depart": "14:45",
-    "returnDepart": "08:10",
+    "returnDepart": "09:10",
     "returnDayOffset": 0
    }
   ],
@@ -809,7 +851,7 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "11:00",
+    "depart": "10:30",
     "returnDepart": "04:55",
     "returnDayOffset": 0
    }
@@ -821,8 +863,8 @@ const seasonSchedules={
      "Mi",
      "Sa"
     ],
-    "depart": "11:30",
-    "returnDepart": "05:20",
+    "depart": "10:30",
+    "returnDepart": "05:35",
     "returnDayOffset": 0
    }
   ],
@@ -834,7 +876,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "15:00",
-    "returnDepart": "09:00",
+    "returnDepart": "09:50",
     "returnDayOffset": 0
    }
   ],
@@ -844,8 +886,8 @@ const seasonSchedules={
      "Di",
      "Sa"
     ],
-    "depart": "11:45",
-    "returnDepart": "05:15",
+    "depart": "10:45",
+    "returnDepart": "06:15",
     "returnDayOffset": 0
    }
   ],
@@ -855,18 +897,18 @@ const seasonSchedules={
      "Di",
      "Sa"
     ],
-    "depart": "11:15",
-    "returnDepart": "14:35",
+    "depart": "12:00",
+    "returnDepart": "14:05",
     "returnDayOffset": 0
    }
   ],
   "sr-mhh-stc": [
    {
     "days": [
-     "Mi"
+     "Fr"
     ],
-    "depart": "11:10",
-    "returnDepart": "16:30",
+    "depart": "12:30",
+    "returnDepart": "09:30",
     "returnDayOffset": 0
    }
   ],
@@ -876,8 +918,8 @@ const seasonSchedules={
      "Di",
      "Sa"
     ],
-    "depart": "10:20",
-    "returnDepart": "16:05",
+    "depart": "10:50",
+    "returnDepart": "15:05",
     "returnDayOffset": 0
    }
   ]

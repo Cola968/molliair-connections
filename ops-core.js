@@ -58,9 +58,38 @@ function validate(data,all,tails,limit=8){
  for(const f of week.filter(isOwn)){const rev=all.find(g=>g.routeId===f.routeId&&g.from===f.to&&g.to===f.from&&g.dep>=f.arr&&g.dep-f.arr<turn(f.aircraft));if(rev)push('SHORT_ROUTE_TURN',f.flightNo+' → '+rev.flightNo+': '+(rev.dep-f.arr)+' min, bei gleichem Flugzeug zu kurz.');}
  return issues;
 }
-function waves(all,airport,day){
+function waves(all,airport,day,{own=true}={}){
  const lo=day*DAY,hi=lo+DAY,arr=all.filter(f=>f.to===airport&&f.arr>=lo&&f.arr<hi),dep=all.filter(f=>f.from===airport&&f.dep>=lo&&f.dep<hi);
- return {arr,dep,links:arr.flatMap(f=>connections(f,all,{own:true}).map(c=>({from:f,to:c.flight,wait:c.wait})))};
+ return {arr,dep,links:arr.flatMap(f=>connections(f,all,{own}).map(c=>({from:f,to:c.flight,wait:c.wait})))};
 }
-const api={events,connections,gates,board,profile,radar,fleet,validate,waves,time,turn,isOwn};root.MolliairOps=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+
+/* A market is a directed origin/destination pair through the selected airport.
+   Group by the day the first flight departs, not by the arrival day at the hub. */
+function hubAudit(all,airport='MOL',{own=false,min=60,max=240}={}){
+ const scope=f=>!own||isOwn(f),week=f=>f.dep>=0&&f.dep<7*DAY;
+ const incoming=all.filter(f=>f.to===airport&&week(f)&&scope(f)),outgoing=all.filter(f=>f.from===airport&&scope(f));
+ const origins=[...new Set(incoming.map(f=>f.from))].sort(),destinations=[...new Set(outgoing.filter(week).map(f=>f.to))].sort(),rows=[];
+ for(const from of origins)for(const to of destinations){if(from===to)continue;
+  const cells=Array.from({length:7},()=>[]);
+  for(const a of incoming.filter(f=>f.from===from))for(const b of outgoing.filter(f=>f.to===to)){
+   const wait=b.dep-a.arr;if(wait<min||wait>max)continue;
+   cells[Math.floor(a.dep/DAY)].push({a,b,wait,minutes:b.arr-a.dep,own:isOwn(a)&&isOwn(b)});
+  }
+  const daily=cells.map(list=>({count:list.length,best:list.slice().sort((a,b)=>a.minutes-b.minutes||a.b.arr-b.b.arr||a.wait-b.wait)[0]||null,earliest:list.slice().sort((a,b)=>a.b.arr-b.b.arr||a.minutes-b.minutes)[0]||null}));
+  rows.push({from,to,daily,days:daily.filter(x=>x.count).length,count:daily.reduce((n,x)=>n+x.count,0)});
+ }
+ return {origins,destinations,rows,markets:rows.length,served:rows.filter(x=>x.days).length,marketDays:rows.reduce((n,x)=>n+x.days,0),count:rows.reduce((n,x)=>n+x.count,0)};
+}
+function routeAudit(all,{min=60,max=240}={}){
+ const week=all.filter(f=>f.dep>=0&&f.dep<7*DAY),rows=new Map();
+ for(const f of week){const key=f.routeId+'|'+f.from+'|'+f.to;const row=rows.get(key)||{id:f.routeId,from:f.from,to:f.to,carrier:f.carrier,flights:0,withBefore:0,withAfter:0,bestBefore:null,bestAfter:null};
+  row.flights++;const before=all.filter(g=>g.to===f.from&&g.from!==f.to&&f.dep-g.arr>=min&&f.dep-g.arr<=max).map(g=>f.dep-g.arr),after=connections(f,all,{min,max}).map(g=>g.wait);
+  if(before.length){row.withBefore++;row.bestBefore=Math.min(row.bestBefore??Infinity,...before);}
+  if(after.length){row.withAfter++;row.bestAfter=Math.min(row.bestAfter??Infinity,...after);}
+  rows.set(key,row);
+ }
+ return [...rows.values()].sort((a,b)=>a.id.localeCompare(b.id)||a.from.localeCompare(b.from));
+}
+
+const api={hubAudit,routeAudit,events,connections,gates,board,profile,radar,fleet,validate,waves,time,turn,isOwn};root.MolliairOps=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
