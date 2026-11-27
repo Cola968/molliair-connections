@@ -47,6 +47,19 @@ function fleet(all){
  }
  return tails.map(t=>({...t,block:t.legs.reduce((s,f)=>s+f.duration,0),last:t.airport,nights:Array.from({length:7},(_,i)=>{const end=(i+1)*DAY,air=t.legs.find(f=>f.dep<end&&f.arr>end),prior=t.legs.filter(f=>f.arr<=end).at(-1);return air?'In der Luft ('+air.flightNo+')':prior?prior.to:t.initial;})}));
 }
+
+/* Distinct airlines on the same directed market should not duplicate the same bank.
+   A two-hour spacing rule is a simulation planning policy, not a legal slot restriction. */
+function spacingConflicts(all,min=120){
+ const sorted=all.slice().sort((a,b)=>a.dep-b.dep),rows=[];
+ for(let i=0;i<sorted.length;i++)for(let j=i+1;j<sorted.length&&sorted[j].dep-sorted[i].dep<min;j++){
+  const a=sorted[i],b=sorted[j];if(a.from!==b.from||a.to!==b.to||a.carrier===b.carrier)continue;
+  if(a.dep<0||a.dep>=7*DAY)continue;
+  rows.push({a,b,gap:b.dep-a.dep,min});
+ }
+ return rows;
+}
+
 function validate(data,all,tails,limit=8){
  const issues=[],week=all.filter(f=>f.dep>=0&&f.dep<7*DAY),ids=new Set(),push=(code,message)=>issues.push({code,message});
  for(const f of week){const k=f.date+'|'+f.flightNo;if(ids.has(k))push('DUPLICATE','Doppelte Flugnummer: '+k);ids.add(k);if(!/^[A-Z0-9]{2}[0-9]+$/.test(f.flightNo)||f.arr<=f.dep||!data.airports.some(a=>a.code===f.from)||!data.airports.some(a=>a.code===f.to)||f.from===f.to)push('INVALID','Ungültiger Flug: '+f.flightNo);}
@@ -56,6 +69,7 @@ function validate(data,all,tails,limit=8){
  const slots=week.filter(f=>f.from==='MOL'&&f.to==='STC');for(const carrier of ['ML','SA'])if(slots.filter(f=>f.carrier===carrier).length>7)push('SLOTS',carrier+': mehr als 7 MOL–STC-Abflüge.');
  for(const f of slots.filter(f=>f.carrier!=='ML'&&new Date(f.date+'T12:00:00Z').getUTCDay()===0))push('SUNDAY','Sonntags-Exklusivität verletzt: '+f.flightNo);
  for(const f of week.filter(isOwn)){const rev=all.find(g=>g.routeId===f.routeId&&g.from===f.to&&g.to===f.from&&g.dep>=f.arr&&g.dep-f.arr<turn(f.aircraft));if(rev)push('SHORT_ROUTE_TURN',f.flightNo+' → '+rev.flightNo+': '+(rev.dep-f.arr)+' min, bei gleichem Flugzeug zu kurz.');}
+ for(const x of spacingConflicts(all))push('BANK_OVERLAP',x.a.from+'–'+x.a.to+': '+x.a.flightNo+' / '+x.b.flightNo+' nur '+x.gap+' min auseinander (Planungsziel 120 min).');
  return issues;
 }
 function waves(all,airport,day,{own=true}={}){
@@ -91,5 +105,5 @@ function routeAudit(all,{min=60,max=240}={}){
  return [...rows.values()].sort((a,b)=>a.id.localeCompare(b.id)||a.from.localeCompare(b.from));
 }
 
-const api={hubAudit,routeAudit,events,connections,gates,board,profile,radar,fleet,validate,waves,time,turn,isOwn};root.MolliairOps=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+const api={spacingConflicts,hubAudit,routeAudit,events,connections,gates,board,profile,radar,fleet,validate,waves,time,turn,isOwn};root.MolliairOps=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

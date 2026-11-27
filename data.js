@@ -375,8 +375,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "10:30",
-    "returnDepart": "03:50",
+    "depart": "15:00",
+    "returnDepart": "08:15",
     "returnDayOffset": 0
    }
   ],
@@ -387,7 +387,7 @@ const seasonSchedules={
      "Mi",
      "Fr"
     ],
-    "depart": "15:00",
+    "depart": "20:15",
     "returnDepart": "08:10",
     "returnDayOffset": 0
    }
@@ -428,8 +428,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "10:15",
-    "returnDepart": "04:20",
+    "depart": "20:15",
+    "returnDepart": "08:30",
     "returnDayOffset": 0
    }
   ],
@@ -504,8 +504,8 @@ const seasonSchedules={
      "Di",
      "Sa"
     ],
-    "depart": "10:45",
-    "returnDepart": "06:00",
+    "depart": "15:00",
+    "returnDepart": "09:45",
     "returnDayOffset": 0
    }
   ],
@@ -765,8 +765,7 @@ const seasonSchedules={
    {
     "days": [
      "Mi",
-     "Do",
-     "Sa"
+     "Do"
     ],
     "depart": "10:45",
     "returnDepart": "08:00",
@@ -776,7 +775,8 @@ const seasonSchedules={
     "days": [
      "Di",
      "Fr",
-     "Mo"
+     "Mo",
+     "Sa"
     ],
     "depart": "15:00",
     "returnDepart": "12:15",
@@ -794,8 +794,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "10:30",
-    "returnDepart": "03:50",
+    "depart": "15:00",
+    "returnDepart": "08:15",
     "returnDayOffset": 0
    }
   ],
@@ -823,8 +823,8 @@ const seasonSchedules={
      "Fr",
      "So"
     ],
-    "depart": "10:15",
-    "returnDepart": "04:20",
+    "depart": "20:00",
+    "returnDepart": "08:30",
     "returnDayOffset": 0
    }
   ],
@@ -886,8 +886,8 @@ const seasonSchedules={
      "Di",
      "Sa"
     ],
-    "depart": "10:45",
-    "returnDepart": "06:15",
+    "depart": "15:00",
+    "returnDepart": "09:45",
     "returnDayOffset": 0
    }
   ],
@@ -1053,6 +1053,44 @@ const legacySchedules={
    ],
    "depart": "12:05",
    "returnDepart": "16:55",
+   "returnDayOffset": 0
+  }
+ ],
+ "aa-mia": [
+  {
+   "days": [
+    "Mo",
+    "Di",
+    "Mi",
+    "Do",
+    "Fr",
+    "Sa"
+   ],
+   "depart": "16:00",
+   "returnDepart": "08:30",
+   "returnDayOffset": 0
+  }
+ ],
+ "sa-mol-stc": [
+  {
+   "days": [
+    "Mo",
+    "Di",
+    "Mi"
+   ],
+   "depart": "15:00",
+   "returnDepart": "12:15",
+   "returnDayOffset": 0
+  }
+ ],
+ "md-tnr": [
+  {
+   "days": [
+    "Di",
+    "Sa"
+   ],
+   "depart": "15:00",
+   "returnDepart": "09:45",
    "returnDayOffset": 0
   }
  ]
