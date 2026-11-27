@@ -1,6 +1,6 @@
 const {test}=require('node:test'); const assert=require('node:assert/strict');
 const data=require('../data.js'); const core=require('../airline-core.js');
-test('summer 2027 frequency is 64 outbound Molliair departures from MOL',()=>{const a=core.networkFlights(data,2027).filter(f=>f.from==='MOL' && f.carrier==='ML'); assert.equal(a.length,64)});
+test('summer 2027 frequency is 74 outbound Molliair departures from MOL',()=>{const a=core.networkFlights(data,2027).filter(f=>f.from==='MOL' && f.carrier==='ML'); assert.equal(a.length,74)});
 test('Friday direct return schedule should have a service',()=>{const r=core.search(data,'MOL','MBG','2027-05-14');assert.ok(r.length);assert.equal(r[0].stops,0);assert.equal(r[0].legs[0].from,'MOL')});
 test('Monday Molliburg to Miami connects in Mollicity',()=>{const r=core.search(data,'MBG','MIA','2027-05-17');assert.ok(r.some(x=>x.stops===1 && x.via==='MOL'))});
 test('Miastadt has no Tuesday Molliair departure in 2027',()=>{const r=core.search(data,'MST','MOL','2027-05-18');assert.equal(r.length,0)});

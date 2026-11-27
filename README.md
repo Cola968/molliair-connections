@@ -1,3 +1,7 @@
+## Version 4.1 – Saisonflugplan und Buchungssimulation
+
+S27 Hochsaison: 74 eigene MOL-Abflüge/W, Atlanta Juni–September 3/W, MBG 28/W, MBG–MIA Mai–September 1/W. W27/28: 60 eigene MOL-Abflüge/W, MBG 21/W und MIA 10/W. Gemeinsame Modellzeitzone; Rückflüge über Saisonwechsel anhand des Abflugdatums. Buchungsauslastung und Preise sind deterministische Modellwerte je Datum, Richtung, Strecke, Kabine und Buchungsstand; lokale Reisepläne beeinflussen den Bestand. Keine echte Ticketierung oder Inventaranbindung. Historische Pressemeldungen bleiben als Archiv erhalten.
+
 ## Version 4.0 – Operations Center
 
 `operations.html`: gemeinsame Simulationsuhr (1×/60×/300×), Terminal-Abflug-/Ankunftstafel mit Vollbild und simulierten Gates/Boardingzeiten, Anschluss-Explorer, Hub-Tageszeitachse, heuristische Flugzeugumläufe, schematischer Radar, Flughafenprofile und Flugplanvalidierung. Keine echten Live-Daten oder bestätigten Registrierungen. Acht aktive Flugzeuge plus Reserve sind ein Ziel; der Kandidatenumlauf zeigt zusätzliche benötigte Maschinen, nicht ein nachgewiesenes Optimum. S27-Flugzeiten bleiben unverändert. Datumsfilter für S27; Zeitzonen vereinfacht. Anschlussmöglichkeiten sind nicht automatisch geschützte Buchungen. 

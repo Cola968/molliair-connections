@@ -1,25 +1,37 @@
 (function(root){
 'use strict';
 const logic=(typeof require==='function'&&typeof module!=='undefined'&&module.exports)?require('./logic.js'):root.RouteLogic;
+const inventory=(typeof require==='function'&&typeof module!=='undefined'&&module.exports)?require('./inventory.js'):root.MolliairInventory;
 const DAYS=['So','Mo','Di','Mi','Do','Fr','Sa'];
-const PRICES={'mol-mbg':54,'mol-mhh':49,'mol-stc':85,'mol-mst':77,'mol-mia':239,'mol-jfk':269,'mol-bos':249,'mol-iad':259,'mbg-mia':249,'mol-bel':189,'mol-tnr':162,'mol-ccs':149,'mol-geo':179,'mol-pty':179,'ml-mbg-ccs':192};
+const PRICES={'mol-mbg':54,'mol-mhh':49,'mol-stc':85,'mol-mst':77,'mol-mia':239,'mol-jfk':269,'mol-bos':249,'mol-iad':259,'mol-atl':279,'mbg-mia':249,'mol-bel':189,'mol-tnr':162,'mol-ccs':149,'mol-geo':179,'mol-pty':179,'ml-mbg-ccs':192};
 const FARES={LIGHT:{label:'LIGHT',extra:0,cabin:8,checked:0,change:'Gegen Gebühr',seat:false},CLASSIC:{label:'CLASSIC',extra:39,cabin:8,checked:23,change:'Gegen Gebühr',seat:false},FLEX:{label:'FLEX',extra:89,cabin:12,checked:23,change:'Kostenlos',seat:true},BUSINESS:{label:'BUSINESS',extra:199,cabin:12,checked:32,change:'Kostenlos',seat:true}};
 const ISO=/^\d{4}-\d{2}-\d{2}$/;
 function parseDay(s){if(typeof s!=='string'||!ISO.test(s))return null;const d=new Date(s+'T12:00:00Z');if(!Number.isFinite(d.getTime())||d.toISOString().slice(0,10)!==s)return null;return d;}
 const dateDay=s=>{const d=parseDay(s);return d?DAYS[d.getUTCDay()]:null};
-function networkFlights(data,year){return logic.flightsFor(data,{year});}
+function networkFlights(data,year,season='summer'){return logic.flightsFor(data,{year,season});}
 /* Stable per-date timetable variation, not random realtime weather/delay data. */
 function plannedDurationDelta(f,s){
  let hash=0;for(const char of `${f.routeId}:${f.id}`)hash=(hash*31+char.charCodeAt(0))%997;
  const ordinal=Math.floor(Date.parse(s+'T00:00:00Z')/86400000);
  return (ordinal*5+hash*7)%9-4;
 }
+function seasonForDate(s){
+ if(s>='2027-03-28'&&s<='2027-10-30')return 'summer';
+ if(s>='2027-10-31'&&s<='2028-03-25')return 'winter';
+ return null;
+}
 function dateFlights(data,s,{includeOtherAirlines=false}={}){
  const d=parseDay(s);if(!d||d.getUTCFullYear()>2030||d.getUTCFullYear()<2026)return[];
- const flights=logic.flightsFor(data,{year:d.getUTCFullYear()===2026||(d.getUTCFullYear()===2027&&s<'2027-03-28')?2026:d.getUTCFullYear()>=2030?2030:2027,day:DAYS[d.getUTCDay()],month:d.getUTCMonth()+1,...(includeOtherAirlines?{}:{airlines:['ML','MC']})});
+ const opts=includeOtherAirlines?{}:{airlines:['ML','MC']};
+ const select=(date)=>{const t=parseDay(date),season=seasonForDate(date);return logic.flightsFor(data,{year:t.getUTCFullYear()===2026||(t.getUTCFullYear()===2027&&date<'2027-03-28')?2026:t.getUTCFullYear()>=2030?2030:2027,day:DAYS[d.getUTCDay()],month:t.getUTCMonth()+1,...(season?{season}:{}),...opts});};
+ // Return legs belong to the originating outbound service date across seasonal boundaries.
+ let flights=select(s);
+ if(data.seasonSchedules&&seasonForDate(s)){
+   flights=flights.filter(f=>!f.serviceOffset).concat(select(dateShift(s,-1)).filter(f=>f.serviceOffset===1));
+ }
  return flights.map(f=>{
   const duration=f.duration+plannedDurationDelta(f,s),arriveMinute=f.departMinute+duration;
-  return {...f,duration,arriveMinute,arrive:logic.fmtTime(arriveMinute)};
+  return {...f,duration,arriveMinute,arrive:logic.fmtTime(arriveMinute),departDate:s,arriveDate:dateShift(s,Math.floor(arriveMinute/1440))};
  });
 }
 function numericPrice(legs,date){const d=parseDay(date);if(!d)return 0;const day=d.getUTCDate(),month=d.getUTCMonth();const fluct=1+(((day*7+month*11)%13)-6)*0.017;return Math.round(legs.reduce((s,l)=>s+(PRICES[l.routeId]||129),0)*fluct);}
@@ -49,19 +61,19 @@ function scheduledFlights(data,date,offset,includeOtherAirlines=false){
    arriveDate:dateShift(date,Math.floor(arriveMinute/1440)),departMinute,arriveMinute};
  });
 }
-function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg'}={}){
+function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg',asOf=null,reservations=[]}={}){
  if(!parseDay(date)||!data.airports.some(a=>a.code===from)||!data.airports.some(a=>a.code===to)||from===to)return [];
  const maxLegs=Math.min(3,Math.max(1,Number(maxStops)+1));
  const includeOtherAirlines=airlineScope==='all'||airlineScope==='partner';
  const airlineNames=new Map(data.airlines.map(a=>[a.id,a.name]));
  const departures=[scheduledFlights(data,date,0,includeOtherAirlines),scheduledFlights(data,date,1,includeOtherAirlines),scheduledFlights(data,date,2,includeOtherAirlines)].flat();
  const byFrom=new Map();for(const f of departures){if(!byFrom.has(f.from))byFrom.set(f.from,[]);byFrom.get(f.from).push(f)}
- const out=[],seen=new Set(),connectionMin=45,connectionMax=Math.max(connectionMin,Math.min(1440,Number(maxLayoverMinutes)||1440));
+ const out=[],seen=new Set(),connectionMin=data.routes.some(r=>data.seasonSchedules?.summer?.[r.id])?60:45,connectionMax=Math.max(connectionMin,Math.min(1440,Number(maxLayoverMinutes)||1440));
  const firstFlights=departures.filter(f=>f.from===from&&f.departDate===date);
  function explore(legs,visited){
   const last=legs[legs.length-1];
   if(last.to===to){
-   const it=toItinerary(legs,date,airlineNames);
+   const it=toItinerary(legs,date,airlineNames);if(asOf&&inventory){it.inventory=inventory.itinerary(it,asOf,reservations);it.businessInventory=inventory.itinerary(it,asOf,reservations,'business');it.price=Math.round(it.price*inventory.priceFactor({...it.inventory,lead:it.inventory.legs[0]?.lead??365}));}
    if(airlineScope==='partner'&&!it.hasOtherAirlines)return;
    if(!seen.has(it.id)){seen.add(it.id);out.push(it)}
    return;
@@ -111,5 +123,5 @@ function quote(itineraries,passengers,fare='LIGHT',extras={}){
 function dateShift(s,delta){const d=parseDay(s);if(!d)return null;d.setUTCDate(d.getUTCDate()+delta);return d.toISOString().slice(0,10);}
 function fmtDate(s,long=false){const d=parseDay(s);return d?new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:long?'long':'short',year:'numeric',timeZone:'UTC',...(long?{weekday:'long'}:{})}).format(d):'–'};
 function timeDuration(minutes){const m=Math.max(0,Number(minutes)||0);return `${Math.floor(m/60)} Std. ${String(m%60).padStart(2,'0')} Min.`;}
-const api={DAYS,FARES,PRICES,parseDay,dateDay,networkFlights,dateFlights,numericPrice,toItinerary,search,nextAvailableDates,quote,passengersCount,dateShift,fmtDate,timeDuration};root.AirlineCore=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+const api={DAYS,FARES,PRICES,parseDay,dateDay,seasonForDate,networkFlights,dateFlights,numericPrice,toItinerary,search,nextAvailableDates,quote,passengersCount,dateShift,fmtDate,timeDuration};root.AirlineCore=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

@@ -69,6 +69,821 @@ for(const [id,from,to,frequency,days,depart,returnDepart,duration,seasonal] of [
  ['mol-iad','MOL','IAD',3,['Mo','Do','Sa'],'19:00','10:40',315,false],
  ['mbg-mia','MBG','MIA',1,['Sa'],'10:30','12:00',310,true]
 ])routes.push({id,from,to,carrier:'ML',byYear:{2026:0,2027:frequency,2030:frequency},aircraft:'E195-E2',seats:132,days,depart,returnDepart,returnDayOffset:1,duration,seasonal,business:true});
-const data={airports,airlines,routes,years:[2026,2027,2030],weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'],disclaimer:'Molliair Streckennetz und Flugplanübersicht.'};
+
+// S27/W27-28 agreed planning model. All times are in a common simulation time zone.
+airports.push({code:'ATL',name:'Atlanta',country:'USA',x:117,y:214,pop:0});
+routes.push({id:'mol-atl',from:'MOL',to:'ATL',carrier:'ML',byYear:{2026:0,2027:3,2030:0},aircraft:'E195-E2',seats:132,days:['Mo','Fr','So'],depart:'15:15',returnDepart:'02:05',returnDayOffset:1,duration:310,seasonal:true,business:true,partner:'Delta Air Lines (fiktives Partnerschaftsszenario)'});
+const seasonSchedules={
+ "summer": {
+  "mol-mbg": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "20:30",
+    "returnDepart": "07:55",
+    "returnDayOffset": 1
+   },
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "So"
+    ],
+    "depart": "10:20",
+    "returnDepart": "12:45",
+    "returnDayOffset": 0
+   },
+   {
+    "days": [
+     "Sa"
+    ],
+    "depart": "08:45",
+    "returnDepart": "22:40",
+    "returnDayOffset": 0,
+    "aircraft": "E195-E2",
+    "seats": 132,
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   {
+    "days": [
+     "Sa"
+    ],
+    "depart": "10:20",
+    "returnDepart": "12:45",
+    "returnDayOffset": 0,
+    "months": [
+     3,
+     4,
+     10
+    ]
+   },
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "14:45",
+    "returnDepart": "16:35",
+    "returnDayOffset": 0
+   },
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "16:15",
+    "returnDepart": "17:50",
+    "returnDayOffset": 0
+   }
+  ],
+  "mol-mhh": [
+   {
+    "days": [
+     "Mo",
+     "Fr"
+    ],
+    "depart": "10:10",
+    "returnDepart": "11:55",
+    "returnDayOffset": 0
+   }
+  ],
+  "mol-mst": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Fr",
+     "So"
+    ],
+    "depart": "10:30",
+    "returnDepart": "13:00",
+    "returnDayOffset": 0
+   }
+  ],
+  "mol-stc": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "So"
+    ],
+    "depart": "20:15",
+    "returnDepart": "07:25",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-mia": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "11:15",
+    "returnDepart": "17:10",
+    "returnDayOffset": 0
+   },
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "20:15",
+    "returnDepart": "04:00",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-jfk": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Fr",
+     "So"
+    ],
+    "depart": "15:15",
+    "returnDepart": "02:00",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-bos": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "Sa"
+    ],
+    "depart": "15:15",
+    "returnDepart": "03:00",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-iad": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "Sa"
+    ],
+    "depart": "20:15",
+    "returnDepart": "02:30",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-bel": [
+   {
+    "days": [
+     "Mo",
+     "Do",
+     "Fr",
+     "So"
+    ],
+    "depart": "15:00",
+    "returnDepart": "03:05",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-tnr": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "Sa"
+    ],
+    "depart": "10:30",
+    "returnDepart": "15:00",
+    "returnDayOffset": 0
+   }
+  ],
+  "mol-atl": [
+   {
+    "days": [
+     "Mo",
+     "Fr",
+     "So"
+    ],
+    "depart": "15:15",
+    "returnDepart": "02:05",
+    "returnDayOffset": 1,
+    "months": [
+     6,
+     7,
+     8,
+     9
+    ]
+   }
+  ],
+  "mbg-mia": [
+   {
+    "days": [
+     "Sa"
+    ],
+    "depart": "10:30",
+    "returnDepart": "16:35",
+    "returnDayOffset": 0,
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   }
+  ],
+  "sa-mol-stc": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa"
+    ],
+    "depart": "11:45",
+    "returnDepart": "08:15",
+    "returnDayOffset": 0
+   }
+  ],
+  "aa-mia": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "11:30",
+    "returnDepart": "04:05",
+    "returnDayOffset": 0
+   }
+  ],
+  "aa-bos": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Fr"
+    ],
+    "depart": "15:15",
+    "returnDepart": "07:10",
+    "returnDayOffset": 0
+   }
+  ],
+  "la-gru": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "11:15",
+    "returnDepart": "03:10",
+    "returnDayOffset": 0
+   }
+  ],
+  "la-for": [
+   {
+    "days": [
+     "Mo",
+     "Fr",
+     "So"
+    ],
+    "depart": "15:35",
+    "returnDepart": "08:10",
+    "returnDayOffset": 0
+   }
+  ],
+  "ad-bel": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Fr",
+     "So"
+    ],
+    "depart": "11:15",
+    "returnDepart": "05:20",
+    "returnDayOffset": 0
+   }
+  ],
+  "ad-rec": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "Sa"
+    ],
+    "depart": "14:45",
+    "returnDepart": "08:10",
+    "returnDayOffset": 0
+   }
+  ],
+  "cm-pty": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "11:00",
+    "returnDepart": "04:55",
+    "returnDayOffset": 0
+   }
+  ],
+  "bw-bgi": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Sa"
+    ],
+    "depart": "11:30",
+    "returnDepart": "05:20",
+    "returnDayOffset": 0
+   }
+  ],
+  "bw-pos": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "So"
+    ],
+    "depart": "15:00",
+    "returnDepart": "09:00",
+    "returnDayOffset": 0
+   }
+  ],
+  "ac-yyz": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Fr",
+     "So"
+    ],
+    "depart": "11:30",
+    "returnDepart": "04:30",
+    "returnDayOffset": 0
+   }
+  ],
+  "md-tnr": [
+   {
+    "days": [
+     "Di",
+     "Sa"
+    ],
+    "depart": "11:45",
+    "returnDepart": "05:15",
+    "returnDayOffset": 0
+   }
+  ],
+  "sr-mbg-stc": [
+   {
+    "days": [
+     "Di",
+     "Sa"
+    ],
+    "depart": "11:15",
+    "returnDepart": "14:35",
+    "returnDayOffset": 0
+   }
+  ],
+  "sr-mhh-stc": [
+   {
+    "days": [
+     "Mi"
+    ],
+    "depart": "11:10",
+    "returnDepart": "16:30",
+    "returnDayOffset": 0
+   }
+  ],
+  "cl-mhf-stc": [
+   {
+    "days": [
+     "Di",
+     "Sa"
+    ],
+    "depart": "10:20",
+    "returnDepart": "16:05",
+    "returnDayOffset": 0
+   }
+  ],
+  "bw-mbg-bgi": [
+   {
+    "days": [
+     "Mi",
+     "Fr",
+     "So"
+    ],
+    "depart": "13:40",
+    "returnDepart": "05:25",
+    "returnDayOffset": 0
+   }
+  ],
+  "sc-mhh-bgi": [
+   {
+    "days": [
+     "Sa"
+    ],
+    "depart": "12:00",
+    "returnDepart": "06:15",
+    "returnDayOffset": 0
+   }
+  ],
+  "sc-mhf-bgi": [
+   {
+    "days": [
+     "Sa",
+     "So"
+    ],
+    "depart": "10:15",
+    "returnDepart": "06:20",
+    "returnDayOffset": 0
+   }
+  ]
+ },
+ "winter": {
+  "mol-mbg": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "20:30",
+    "returnDepart": "07:55",
+    "returnDayOffset": 1
+   },
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "10:20",
+    "returnDepart": "12:45",
+    "returnDayOffset": 0
+   },
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "14:45",
+    "returnDepart": "16:35",
+    "returnDayOffset": 0
+   }
+  ],
+  "mol-mhh": [
+   {
+    "days": [
+     "Mo",
+     "Fr"
+    ],
+    "depart": "10:10",
+    "returnDepart": "11:55",
+    "returnDayOffset": 0
+   }
+  ],
+  "mol-mst": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Fr",
+     "So"
+    ],
+    "depart": "10:30",
+    "returnDepart": "13:00",
+    "returnDayOffset": 0
+   }
+  ],
+  "mol-stc": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "So"
+    ],
+    "depart": "20:15",
+    "returnDepart": "07:25",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-mia": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "11:15",
+    "returnDepart": "17:10",
+    "returnDayOffset": 0
+   },
+   {
+    "days": [
+     "Mo",
+     "Do",
+     "Fr"
+    ],
+    "depart": "20:15",
+    "returnDepart": "04:00",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-jfk": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Fr",
+     "So"
+    ],
+    "depart": "15:15",
+    "returnDepart": "02:00",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-bos": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "Sa"
+    ],
+    "depart": "15:15",
+    "returnDepart": "03:00",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-iad": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "Sa"
+    ],
+    "depart": "20:15",
+    "returnDepart": "02:30",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-bel": [
+   {
+    "days": [
+     "Mo",
+     "Do",
+     "Fr",
+     "So"
+    ],
+    "depart": "15:00",
+    "returnDepart": "03:05",
+    "returnDayOffset": 1
+   }
+  ],
+  "mol-tnr": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "Sa"
+    ],
+    "depart": "10:30",
+    "returnDepart": "15:00",
+    "returnDayOffset": 0
+   }
+  ],
+  "sa-mol-stc": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa"
+    ],
+    "depart": "11:45",
+    "returnDepart": "08:15",
+    "returnDayOffset": 0
+   }
+  ],
+  "aa-mia": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "11:30",
+    "returnDepart": "04:05",
+    "returnDayOffset": 0
+   }
+  ],
+  "la-gru": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "11:15",
+    "returnDepart": "03:10",
+    "returnDayOffset": 0
+   }
+  ],
+  "ad-bel": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Fr",
+     "So"
+    ],
+    "depart": "11:15",
+    "returnDepart": "05:20",
+    "returnDayOffset": 0
+   }
+  ],
+  "ad-rec": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "Sa"
+    ],
+    "depart": "14:45",
+    "returnDepart": "08:10",
+    "returnDayOffset": 0
+   }
+  ],
+  "cm-pty": [
+   {
+    "days": [
+     "Mo",
+     "Di",
+     "Mi",
+     "Do",
+     "Fr",
+     "Sa",
+     "So"
+    ],
+    "depart": "11:00",
+    "returnDepart": "04:55",
+    "returnDayOffset": 0
+   }
+  ],
+  "bw-bgi": [
+   {
+    "days": [
+     "Mo",
+     "Mi",
+     "Sa"
+    ],
+    "depart": "11:30",
+    "returnDepart": "05:20",
+    "returnDayOffset": 0
+   }
+  ],
+  "bw-pos": [
+   {
+    "days": [
+     "Di",
+     "Do",
+     "So"
+    ],
+    "depart": "15:00",
+    "returnDepart": "09:00",
+    "returnDayOffset": 0
+   }
+  ],
+  "md-tnr": [
+   {
+    "days": [
+     "Di",
+     "Sa"
+    ],
+    "depart": "11:45",
+    "returnDepart": "05:15",
+    "returnDayOffset": 0
+   }
+  ],
+  "sr-mbg-stc": [
+   {
+    "days": [
+     "Di",
+     "Sa"
+    ],
+    "depart": "11:15",
+    "returnDepart": "14:35",
+    "returnDayOffset": 0
+   }
+  ],
+  "sr-mhh-stc": [
+   {
+    "days": [
+     "Mi"
+    ],
+    "depart": "11:10",
+    "returnDepart": "16:30",
+    "returnDayOffset": 0
+   }
+  ],
+  "cl-mhf-stc": [
+   {
+    "days": [
+     "Di",
+     "Sa"
+    ],
+    "depart": "10:20",
+    "returnDepart": "16:05",
+    "returnDayOffset": 0
+   }
+  ]
+ }
+};
+for(const r of routes){if(seasonSchedules.summer[r.id]){r.byYear[2027]=seasonSchedules.summer[r.id].filter(x=>!x.months||x.months.includes(6)).reduce((n,x)=>n+x.days.length,0);}}
+const data={airports,airlines,routes,seasonSchedules,years:[2026,2027,2030],weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'],disclaimer:'Molliair Streckennetz und Flugplanübersicht.'};
 root.FLIGHT_DATA=data;if(typeof module!=='undefined'&&module.exports)module.exports=data;
 })(typeof window!=='undefined'?window:globalThis);
