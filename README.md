@@ -1,3 +1,7 @@
+## Version 4.0 – Operations Center
+
+`operations.html`: gemeinsame Simulationsuhr (1×/60×/300×), Terminal-Abflug-/Ankunftstafel mit Vollbild und simulierten Gates/Boardingzeiten, Anschluss-Explorer, Hub-Tageszeitachse, heuristische Flugzeugumläufe, schematischer Radar, Flughafenprofile und Flugplanvalidierung. Keine echten Live-Daten oder bestätigten Registrierungen. Acht aktive Flugzeuge plus Reserve sind ein Ziel; der Kandidatenumlauf zeigt zusätzliche benötigte Maschinen, nicht ein nachgewiesenes Optimum. S27-Flugzeiten bleiben unverändert. Datumsfilter für S27; Zeitzonen vereinfacht. Anschlussmöglichkeiten sind nicht automatisch geschützte Buchungen. 
+
 ## Version 3.4 – Wochenflugplan
 
 Datumsbezogene Sieben-Tage-Übersicht für alle Modellflughäfen, Abflüge und Ankünfte, Airline- und Textfilter, Plansitze und Tageszahlen. Nachtankünfte werden dem Ankunftstag zugeordnet. Keine Live-Daten.
