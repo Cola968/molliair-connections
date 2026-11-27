@@ -1,3 +1,7 @@
+## Version 4.3 – Netzweite Wellenoptimierung
+
+Alle 30 Sommer- und 22 Winterstrecken (einschließlich fremder Airlines) wurden als Zeitplanvariablen bzw. unveränderte Randbedingungen untersucht. Koordinatensuche mit ±60 Minuten, 15-Minuten-Raster, anschließenden Stachelcity-Wochentagsvarianten; 3.244 + 560 + 984 + 952 gültig bewertete Kandidaten bzw. Varianten. Keine globale Optimalität. 75 eigene Sommer-Flugpaare (74 MOL), 60 Winter-Flugpaare. Fremdflugzeiten sind Vorschläge im fiktiven Modell, keine bestätigten Partnerpläne. Anschlussmatrix im Operations Center: jede gerichtete Relation, Tag, kürzeste Reise und Lücken; Streckenprüfung beider Richtungen. 51 Referenzwochen ohne harte Fehler in der heuristischen Zuteilung, hypothetische Gegenflug-Warnhinweise bleiben sichtbar. Wartung, Crew und externe Drehkreuze fehlen weiterhin.
+
 ## Version 4.2 – Flugauswahl und Reiseziele
 
 Vollständiger Zielkatalog aus dem Modell, getrennt nach eigenem Netz, Fremdairlines, aktuellem Altflugplan und Ausbau. Individuell lizenzierte Ortsbilder und ausdrücklich gekennzeichnete Symbolbilder. Flugsuche vergleicht sämtliche modellierten Wege bis zu zwei Umstiegen, verbirgt schlechtere Zubringer zum identischen Anschluss, sortiert nach Empfehlung, Abflug, Ankunft, Dauer und Preis, mit Kabinen- und Tageszeitfiltern. S27/W27-28 Anschlusszeiten wurden in einer 140-Kombinationen-Teiloptimierung verbessert; Altflugplan 2026 erhält gestaffelte eigene Frequenzen. Keine globale Optimierung aller Flugzeiten oder echte Ticketierung.
