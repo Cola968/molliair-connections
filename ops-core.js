@@ -48,12 +48,12 @@ function fleet(all){
  return tails.map(t=>({...t,block:t.legs.reduce((s,f)=>s+f.duration,0),last:t.airport,nights:Array.from({length:7},(_,i)=>{const end=(i+1)*DAY,air=t.legs.find(f=>f.dep<end&&f.arr>end),prior=t.legs.filter(f=>f.arr<=end).at(-1);return air?'In der Luft ('+air.flightNo+')':prior?prior.to:t.initial;})}));
 }
 
-/* Distinct airlines on the same directed market should not duplicate the same bank.
+/* All flights on the same directed market should not duplicate the same bank.
    A two-hour spacing rule is a simulation planning policy, not a legal slot restriction. */
 function spacingConflicts(all,min=120){
  const sorted=all.slice().sort((a,b)=>a.dep-b.dep),rows=[];
  for(let i=0;i<sorted.length;i++)for(let j=i+1;j<sorted.length&&sorted[j].dep-sorted[i].dep<min;j++){
-  const a=sorted[i],b=sorted[j];if(a.from!==b.from||a.to!==b.to||a.carrier===b.carrier)continue;
+  const a=sorted[i],b=sorted[j];if(a.from!==b.from||a.to!==b.to)continue;
   if(a.dep<0||a.dep>=7*DAY)continue;
   rows.push({a,b,gap:b.dep-a.dep,min});
  }
