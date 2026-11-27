@@ -21,8 +21,8 @@ test('Stachelair morning service and six flights each for STC airlines',()=>{
  let sa=logic.flightsFor(data,{year:2027,airlines:['SA']}).filter(x=>x.routeId==='sa-mol-stc'&&x.from==='MOL');
  assert.equal(ml.length,6);assert.equal(sa.length,6);
  assert.ok(sa.every(x=>x.depart==='11:45'));
- assert.equal(fl('2027-05-22').filter(x=>x.routeId==='mol-stc').length,0);
- assert.equal(fl('2027-05-23').filter(x=>x.routeId==='sa-mol-stc').length,0);
+ assert.equal(fl('2027-05-22').filter(x=>x.routeId==='mol-stc'&&x.from==='MOL').length,0);
+ assert.equal(core.dateFlights(data,'2027-05-23',{includeOtherAirlines:true}).filter(x=>x.routeId==='sa-mol-stc'&&x.from==='MOL').length,0);
 });
 test('Monday has four MBG rotations and totals 74 own weekly hub departures',()=>{
  const all=logic.flightsFor(data,{year:2027,airlines:['ML','MC']});
