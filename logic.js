@@ -12,24 +12,35 @@ const makeDays=(r,count)=>{
  let i=0;while(out.length<count)out.push(extra[i++%extra.length]);
  return out;
 };
-function routesForYear(data,year){return data.routes.filter(r=>(r.byYear[year]||0)>0).map(r=>{const s={...r,...(r.scheduleByYear?.[year]||{})};return {...s,frequency:r.byYear[year],daysActive:s.rotations?s.rotations.flatMap(()=>s.days):makeDays(s,r.byYear[year]),carrier:(year>=2030&&r.operatedBy2030)||r.carrier};});}
+function routesForYear(data,year,season='summer',month=0){
+ if(+year===2027&&data.seasonSchedules?.[season]){
+  const schedule=data.seasonSchedules[season],m=month|| (season==='winter'?1:6);
+  return data.routes.filter(r=>schedule[r.id]).map(r=>{
+   const rotations=schedule[r.id].map((x,index)=>({...x,index})).filter(x=>!x.months||x.months.includes(m));
+   if(season==='summer'&&r.seasonal&&(m<5||m>9))return null;
+   return {...r,frequency:rotations.reduce((n,x)=>n+x.days.length,0),daysActive:rotations.flatMap(x=>x.days),rotations,seasonPlan:true};
+  }).filter(r=>r&&r.frequency);
+ }
+ return data.routes.filter(r=>(r.byYear[year]||0)>0).map(r=>{const s={...r,...(r.scheduleByYear?.[year]||{})};return {...s,frequency:r.byYear[year],daysActive:s.rotations?s.rotations.flatMap(()=>s.days):makeDays(s,r.byYear[year]),carrier:(year>=2030&&r.operatedBy2030)||r.carrier};});
+}
 function expandFlights(routes,data){const out=[];
- for(const r of routes){r.daysActive.forEach((day,n)=>{
-  const isExtra=n>=r.days.length&&r.extraDays?.includes(day);
-  const rotation=r.rotations?.[Math.floor(n/r.days.length)];
-  const dep=rotation?.depart||(isExtra?r.extraDepart:r.depart);
-  const ret=rotation?.returnDepart||(isExtra?r.extraReturnDepart:r.returnDepart);
-  const returnDay=days[(days.indexOf(day)+(rotation?.returnDayOffset??r.returnDayOffset??0))%7];
-  const base={routeId:r.id,carrier:r.carrier,aircraft:r.aircraft,seats:r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration};
-  const idx=data.routes.findIndex(x=>x.id===r.id);const no=n<10?101+idx*20+n*2:1001+idx*100+n*2;
-  out.push({...base,id:r.id+'-o-'+n,from:r.from,to:r.to,depart:dep,departMinute:asMin(dep),arrive:fmtTime(asMin(dep)+r.duration),arriveMinute:asMin(dep)+r.duration,flightNo:r.carrier+no});
-  out.push({...base,day:returnDay,id:r.id+'-i-'+n,from:r.to,to:r.from,depart:ret,departMinute:asMin(ret),arrive:fmtTime(asMin(ret)+r.duration),arriveMinute:asMin(ret)+r.duration,flightNo:r.carrier+(no+1)});
- });}return out;
+ for(const r of routes){
+  const pairs=r.seasonPlan?r.rotations.flatMap(rot=>rot.days.map((day)=>({day,rotation:rot,n:rot.index*14+days.indexOf(day)*2}))):r.daysActive.map((day,n)=>({day,n,rotation:r.rotations?.[Math.floor(n/r.days.length)]}));
+  pairs.forEach(({day,n,rotation})=>{
+   const isExtra=n>=r.days.length&&r.extraDays?.includes(day);
+   const dep=rotation?.depart||(isExtra?r.extraDepart:r.depart),ret=rotation?.returnDepart||(isExtra?r.extraReturnDepart:r.returnDepart);
+   const offset=rotation?.returnDayOffset??r.returnDayOffset??0,returnDay=days[(days.indexOf(day)+offset)%7];
+   const base={routeId:r.id,carrier:r.carrier,aircraft:rotation?.aircraft||r.aircraft,seats:rotation?.seats||r.seats,seasonal:!!r.seasonal,business:!!r.business,day,duration:r.duration,serviceOffset:0,partner:r.partner||null};
+   const idx=data.routes.findIndex(x=>x.id===r.id),no=r.seasonPlan?100+idx*100+n:n<10?101+idx*20+n*2:1001+idx*100+n*2;
+   out.push({...base,id:r.id+'-o-'+n,from:r.from,to:r.to,depart:dep,departMinute:asMin(dep),arrive:fmtTime(asMin(dep)+r.duration),arriveMinute:asMin(dep)+r.duration,flightNo:r.carrier+no});
+   out.push({...base,serviceOffset:offset,day:returnDay,id:r.id+'-i-'+n,from:r.to,to:r.from,depart:ret,departMinute:asMin(ret),arrive:fmtTime(asMin(ret)+r.duration),arriveMinute:asMin(ret)+r.duration,flightNo:r.carrier+(no+1)});
+  });
+ }return out;
 }
 const routeClass=(data,carrier)=>data.airlines.find(x=>x.id===carrier)?.group||'Andere';
 function flightsFor(data,opts={}){
  const year=+opts.year||2027,month=+opts.month||0;
- let flights=expandFlights(routesForYear(data,year),data);
+ let flights=expandFlights(routesForYear(data,year,opts.season||'summer',month),data);
  if(opts.day&&opts.day!=='Alle')flights=flights.filter(f=>f.day===opts.day);
  if(month&& (month<5||month>9))flights=flights.filter(f=>!f.seasonal);
  if(opts.airlines?.length)flights=flights.filter(f=>opts.airlines.includes(f.carrier));
