@@ -13,20 +13,21 @@
   <link rel="stylesheet" href="airline.css">
   <link rel="stylesheet" href="professional.css">
   <link rel="stylesheet" href="newsroom.css">
+  <link rel="stylesheet" href="timetable.css">
 </head>
 <body>
   <div id="site">
-    <div class="utility-bar"><div class="container utility-inner"><span>Molliair · Sommerflugplan 2027</span><div><a href="#/status">Flugstatus</a><a href="#/help">Hilfe & Kontakt</a><button id="languageBtn" class="utility-locale" aria-label="Sprache und Währung">DE <span class="middot">·</span> EUR <span aria-hidden="true">⌄</span></button></div></div></div>
+    <div class="utility-bar"><div class="container utility-inner"><span>Molliair · Sommerflugplan 2027</span><div><a href="#/timetable">Wochenflugplan</a><a href="#/status">Flugstatus</a><a href="#/help">Hilfe & Kontakt</a><button id="languageBtn" class="utility-locale" aria-label="Sprache und Währung">DE <span class="middot">·</span> EUR <span aria-hidden="true">⌄</span></button></div></div></div>
     <header class="site-header"><div class="container header-inner">
       <a href="#/home" class="brand" aria-label="Molliair – Startseite"><svg class="brand-mark" viewBox="0 0 58 58" aria-hidden="true"><rect x="1" y="1" width="56" height="56" rx="17" fill="#c9e93a"/><path d="M10 37C25 35 35 27 47 15M17 43C30 41 39 35 47 27M28 47c8-3 13-7 19-13" stroke="#0c2744" stroke-width="5.2" stroke-linecap="round" fill="none"/></svg><span class="brand-word">molli<span>air</span></span></a>
       <nav class="desktop-nav" aria-label="Hauptnavigation"><a href="#/booking">Flüge buchen</a><a href="#/destinations">Reiseziele</a><a href="#/offers">Angebote</a><a href="#/baggage">Reiseinformationen</a><a href="#/news">Newsroom</a></nav>
       <div class="header-actions"><a href="#/manage" class="club-link">Meine Buchung</a><button id="notificationToggle" type="button" class="notification-toggle" aria-label="Benachrichtigungen öffnen" aria-expanded="false" aria-controls="notificationPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg><span id="notificationCount" class="notification-count" hidden></span></button><button class="header-search" id="openSearchBtn" aria-label="Zur Flugsuche"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5.5 5.5"/></svg></button><button id="mobileMenuToggle" class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span><span></span></button></div>
     </div></header>
-    <div class="mobile-drawer" id="mobileDrawer" hidden><nav aria-label="Mobilmenü"><a href="#/home">Startseite</a><a href="#/destinations">Reiseziele</a><a href="#/offers">Angebote</a><a href="#/baggage">Reiseinformationen</a><a href="#/city">Molliair City</a><a href="#/fleet">Unsere Flotte</a><a href="#/club">Molliair Club</a><a href="#/manage">Meine Buchung</a><a href="#/checkin">Online Check-in</a><a href="#/status">Flugstatus</a><a href="#/network">Streckennetz</a><a href="#/news">Newsroom</a><a href="#/about">Über Molliair</a><a href="#/help">Hilfe & Kontakt</a></nav></div>
+    <div class="mobile-drawer" id="mobileDrawer" hidden><nav aria-label="Mobilmenü"><a href="#/home">Startseite</a><a href="#/destinations">Reiseziele</a><a href="#/offers">Angebote</a><a href="#/baggage">Reiseinformationen</a><a href="#/city">Molliair City</a><a href="#/fleet">Unsere Flotte</a><a href="#/club">Molliair Club</a><a href="#/manage">Meine Buchung</a><a href="#/checkin">Online Check-in</a><a href="#/status">Flugstatus</a><a href="#/network">Streckennetz</a><a href="#/timetable">Wochenflugplan</a><a href="#/news">Newsroom</a><a href="#/about">Über Molliair</a><a href="#/help">Hilfe & Kontakt</a></nav></div>
     <main id="app" tabindex="-1"></main>
     <footer class="footer"><div class="container"><div class="footer-main">
       <div class="footer-brand"><div class="footer-logo"><span class="footer-plane">✦</span> molliair</div><p>Flüge ab Mollicity, regionale Verbindungen und internationale Reiseziele.</p><div class="footer-badges"><span>Molliair Group</span><span>ARG</span></div></div>
-      <div><h4>Flüge & Reiseziele</h4><a href="#/booking">Flüge buchen</a><a href="#/offers">Aktuelle Angebote</a><a href="#/destinations">Alle Reiseziele</a><a href="#/network">Streckennetz</a><a href="#/status">Flugstatus</a></div>
+      <div><h4>Flüge & Reiseziele</h4><a href="#/booking">Flüge buchen</a><a href="#/offers">Aktuelle Angebote</a><a href="#/destinations">Alle Reiseziele</a><a href="#/network">Streckennetz</a><a href="#/timetable">Wochenflugplan</a><a href="#/status">Flugstatus</a></div>
       <div><h4>Deine Reise</h4><a href="#/manage">Buchung verwalten</a><a href="#/checkin">Online Check-in</a><a href="#/baggage">Gepäck & Tarife</a><a href="#/experience">An Bord</a><a href="#/club">Molliair Club</a></div>
       <div><h4>Über Molliair</h4><a href="#/about">Unternehmen</a><a href="#/fleet">Unsere Flotte</a><a href="#/city">Molliair City</a><a href="#/news">Newsroom</a><a href="#/help">Kontakt & Hilfe</a></div>
     </div><div class="footer-bottom"><span>© 2026 Molliair · A member of Aurelia Regional Group</span><div><a href="#/legal">Datenschutz & Rechtliches</a><span>Deutsch · EUR (€)</span></div></div></div></footer>
@@ -42,6 +43,7 @@
   <script src="logic.js"></script>
   <script src="airline-core.js"></script>
   <script src="newsroom.js"></script>
+  <script src="timetable.js"></script>
   <script src="airline.js"></script>
 </body>
 </html>

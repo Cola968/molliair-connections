@@ -1,0 +1,11 @@
+const test=require('node:test');const assert=require('node:assert/strict');const D=require('../data.js');const C=require('../airline-core.js');const {collect,render}=require('../timetable.js');
+test("64 eigene MOL-Abflüge",()=>assert.ok(((f,D,C)=>f(D,C,{start:"2027-06-07",airport:"MOL",scope:"arg"}).length===64)(collect,D,C)));
+test("22 eigene MBG-Abflüge im Juni",()=>assert.ok(((f,D,C)=>f(D,C,{start:"2027-06-07",airport:"MBG",scope:"arg"}).length===22)(collect,D,C)));
+test("21 eigene MBG-Abflüge im April",()=>assert.ok(((f,D,C)=>f(D,C,{start:"2027-04-05",airport:"MBG",scope:"arg"}).length===21)(collect,D,C)));
+test("Andere Airlines eingeschlossen",()=>assert.ok(((f,D,C)=>f(D,C,{start:"2027-06-07",airport:"MBG",scope:"all"}).length>22)(collect,D,C)));
+test("Ankunft nach Mitternacht",()=>assert.ok(((f,D,C)=>f(D,C,{start:"2027-06-08",airport:"IAD",scope:"arg",direction:"arrivals"}).some(x=>x.date==="2027-06-08"&&x.departDate==="2027-06-07"))(collect,D,C)));
+test("Flugnummernsuche",()=>assert.ok(((f,D,C)=>{const o={start:"2027-06-07",airport:"MOL",scope:"arg"};const a=f(D,C,o);const b=f(D,C,{...o,query:a[0].flight.flightNo});return b.length>0&&b.every(x=>x.flight.flightNo===a[0].flight.flightNo)&&f(D,C,{...o,query:"ZZZ999"}).length===0;})(collect,D,C)));
+test("Ungültiges Datum",()=>assert.ok(((f,D,C)=>f(D,C,{start:"2027-02-30",airport:"MOL"}).length===0)(collect,D,C)));
+test("Chronologische Sortierung",()=>assert.ok(((f,D,C)=>{const a=f(D,C,{start:"2027-06-07",airport:"MOL",scope:"all",direction:"arrivals"});return a.length>0&&a.every((x,i)=>i===0||a[i-1].date+" "+a[i-1].time<=x.date+" "+x.time);})(collect,D,C)));
+test("Einzelne Airline",()=>assert.ok(((f,D,C)=>{const a=f(D,C,{start:"2027-06-07",airport:"MBG",scope:"SR"});return a.length===2&&a.every(x=>x.flight.carrier==="SR");})(collect,D,C)));
+test('Wochenansicht enthält Ergebnisse und Filter',()=>{assert.match(render(D,C),/weekly-controls/);assert.match(render(D,C),/weekly-results/);assert.match(render(D,C),/New York-JFK/);});
