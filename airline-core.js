@@ -61,15 +61,15 @@ function scheduledFlights(data,date,offset,includeOtherAirlines=false){
    arriveDate:dateShift(date,Math.floor(arriveMinute/1440)),departMinute,arriveMinute};
  });
 }
-function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg',asOf=null,reservations=[],limit=100}={}){
- if(!parseDay(date)||!data.airports.some(a=>a.code===from)||!data.airports.some(a=>a.code===to)||from===to)return [];
+function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg',asOf=null,reservations=[],limit=100,minDepartureMinute=0}={}){
+ if(!parseDay(date)||(asOf&&(!parseDay(asOf)||date<asOf||date<'2026-11-23'||date>'2028-03-25'))||!data.airports.some(a=>a.code===from)||!data.airports.some(a=>a.code===to)||from===to)return [];
  const maxLegs=Math.min(3,Math.max(1,Number(maxStops)+1));
  const includeOtherAirlines=airlineScope==='all'||airlineScope==='partner';
  const airlineNames=new Map(data.airlines.map(a=>[a.id,a.name]));
- const departures=[scheduledFlights(data,date,0,includeOtherAirlines),scheduledFlights(data,date,1,includeOtherAirlines),scheduledFlights(data,date,2,includeOtherAirlines)].flat();
+ const departures=[scheduledFlights(data,date,0,includeOtherAirlines),scheduledFlights(data,date,1,includeOtherAirlines),scheduledFlights(data,date,2,includeOtherAirlines)].flat().filter(f=>!asOf||f.departDate<='2028-03-25');
  const byFrom=new Map();for(const f of departures){if(!byFrom.has(f.from))byFrom.set(f.from,[]);byFrom.get(f.from).push(f)}
  const out=[],seen=new Set(),connectionMin=data.routes.some(r=>data.seasonSchedules?.summer?.[r.id])?60:45,connectionMax=Math.max(connectionMin,Math.min(1440,Number(maxLayoverMinutes)||1440));
- const firstFlights=departures.filter(f=>f.from===from&&f.departDate===date);
+ const firstFlights=departures.filter(f=>f.from===from&&f.departDate===date&&f.departMinute>=minDepartureMinute);
  function explore(legs,visited){
   const last=legs[legs.length-1];
   if(last.to===to){
@@ -98,6 +98,13 @@ function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440
  };
  return out.sort(comparators[sort]||comparators.recommended).slice(0,Number.isFinite(limit)?Math.max(0,limit):undefined);
 }
+// The earliest return departure is at least 60 minutes after actual outbound arrival.
+function returnThreshold(out,date,min=60){
+ if(!out||!parseDay(date)||!parseDay(out.arriveDate))return 0;
+ const last=out.legs.at(-1),clock=((last.arriveMinute%1440)+1440)%1440;
+ return Math.max(0,Math.round((parseDay(out.arriveDate)-parseDay(date))/86400000)*1440+clock+min);
+}
+function validReturn(out,back,min=60){return !!(out&&back&&back.from===out.to&&back.to===out.from&&back.legs[0].departMinute>=returnThreshold(out,back.departDate,min));}
 function nextAvailableDates(data,from,to,fromDate,{days=21,maxStops=2,airlineScope='arg'}={}){
  if(!parseDay(fromDate))return[];
  const found=[];
@@ -124,5 +131,5 @@ function quote(itineraries,passengers,fare='LIGHT',extras={}){
 function dateShift(s,delta){const d=parseDay(s);if(!d)return null;d.setUTCDate(d.getUTCDate()+delta);return d.toISOString().slice(0,10);}
 function fmtDate(s,long=false){const d=parseDay(s);return d?new Intl.DateTimeFormat('de-DE',{day:'2-digit',month:long?'long':'short',year:'numeric',timeZone:'UTC',...(long?{weekday:'long'}:{})}).format(d):'–'};
 function timeDuration(minutes){const m=Math.max(0,Number(minutes)||0);return `${Math.floor(m/60)} Std. ${String(m%60).padStart(2,'0')} Min.`;}
-const api={DAYS,FARES,PRICES,parseDay,dateDay,seasonForDate,networkFlights,dateFlights,numericPrice,toItinerary,search,nextAvailableDates,quote,passengersCount,dateShift,fmtDate,timeDuration};root.AirlineCore=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+const api={DAYS,FARES,PRICES,parseDay,dateDay,seasonForDate,networkFlights,dateFlights,numericPrice,toItinerary,search,returnThreshold,validReturn,nextAvailableDates,quote,passengersCount,dateShift,fmtDate,timeDuration};root.AirlineCore=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
