@@ -100,7 +100,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "10:20",
-    "returnDepart": "12:45",
+    "returnDepart": "13:00",
     "returnDayOffset": 0
    },
    {
@@ -125,7 +125,7 @@ const seasonSchedules={
      "Sa"
     ],
     "depart": "10:20",
-    "returnDepart": "12:45",
+    "returnDepart": "13:00",
     "returnDayOffset": 0,
     "months": [
      3,
@@ -158,7 +158,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "16:15",
-    "returnDepart": "17:50",
+    "returnDepart": "18:10",
     "returnDayOffset": 0
    }
   ],
@@ -212,7 +212,7 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "11:15",
+    "depart": "10:30",
     "returnDepart": "17:10",
     "returnDayOffset": 0
    },
@@ -581,7 +581,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "10:20",
-    "returnDepart": "12:45",
+    "returnDepart": "13:00",
     "returnDayOffset": 0
    },
    {
@@ -595,7 +595,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "14:45",
-    "returnDepart": "16:35",
+    "returnDepart": "17:20",
     "returnDayOffset": 0
    }
   ],
@@ -649,7 +649,7 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "11:15",
+    "depart": "10:30",
     "returnDepart": "17:10",
     "returnDayOffset": 0
    },
@@ -883,7 +883,139 @@ const seasonSchedules={
   ]
  }
 };
+const legacySchedules={
+ "mol-mbg": [
+  {
+   "days": [
+    "Mo",
+    "Di",
+    "Mi",
+    "Do",
+    "Fr",
+    "Sa",
+    "So"
+   ],
+   "depart": "20:30",
+   "returnDepart": "07:55",
+   "returnDayOffset": 1
+  },
+  {
+   "days": [
+    "Mo",
+    "Mi",
+    "Fr"
+   ],
+   "depart": "09:15",
+   "returnDepart": "11:00",
+   "returnDayOffset": 0
+  }
+ ],
+ "mol-mhh": [
+  {
+   "days": [
+    "Mo",
+    "Di",
+    "Mi",
+    "Do",
+    "Fr",
+    "Sa",
+    "So"
+   ],
+   "depart": "09:55",
+   "returnDepart": "11:25",
+   "returnDayOffset": 0
+  },
+  {
+   "days": [
+    "Fr"
+   ],
+   "depart": "16:00",
+   "returnDepart": "17:30",
+   "returnDayOffset": 0
+  }
+ ],
+ "mol-stc": [
+  {
+   "days": [
+    "Mo",
+    "Di",
+    "Mi",
+    "Do"
+   ],
+   "depart": "21:05",
+   "returnDepart": "07:05",
+   "returnDayOffset": 1
+  }
+ ],
+ "mol-mia": [
+  {
+   "days": [
+    "Mo",
+    "Di",
+    "Mi",
+    "Do",
+    "Fr",
+    "Sa",
+    "So"
+   ],
+   "depart": "13:00",
+   "returnDepart": "03:45",
+   "returnDayOffset": 1
+  },
+  {
+   "days": [
+    "Mo",
+    "Mi",
+    "Fr"
+   ],
+   "depart": "19:15",
+   "returnDepart": "01:15",
+   "returnDayOffset": 1
+  }
+ ],
+ "mol-bel": [
+  {
+   "days": [
+    "Mo",
+    "Mi",
+    "Fr",
+    "Sa",
+    "So"
+   ],
+   "depart": "13:15",
+   "returnDepart": "02:30",
+   "returnDayOffset": 1
+  }
+ ],
+ "mol-tnr": [
+  {
+   "days": [
+    "Mo",
+    "Di",
+    "Mi",
+    "Do",
+    "Fr",
+    "Sa",
+    "So"
+   ],
+   "depart": "11:45",
+   "returnDepart": "15:35",
+   "returnDayOffset": 0
+  }
+ ],
+ "mol-ccs": [
+  {
+   "days": [
+    "Di",
+    "Sa"
+   ],
+   "depart": "12:05",
+   "returnDepart": "16:55",
+   "returnDayOffset": 0
+  }
+ ]
+};
 for(const r of routes){if(seasonSchedules.summer[r.id]){r.byYear[2027]=seasonSchedules.summer[r.id].filter(x=>!x.months||x.months.includes(6)).reduce((n,x)=>n+x.days.length,0);}}
-const data={airports,airlines,routes,seasonSchedules,years:[2026,2027,2030],weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'],disclaimer:'Molliair Streckennetz und Flugplanübersicht.'};
+const data={airports,airlines,routes,seasonSchedules,legacySchedules,years:[2026,2027,2030],weekdays:['Mo','Di','Mi','Do','Fr','Sa','So'],disclaimer:'Molliair Streckennetz und Flugplanübersicht.'};
 root.FLIGHT_DATA=data;if(typeof module!=='undefined'&&module.exports)module.exports=data;
 })(typeof window!=='undefined'?window:globalThis);
