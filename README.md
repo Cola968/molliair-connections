@@ -1,3 +1,7 @@
+## Version 4.6 – Buchungskorrektur und klassische Flugauswahl
+
+Kompakte V3.2-Flugkarten, Abflugreihenfolge als Standard, exakte Umsteigezeiten und Ankunftsdaten. Kurze Anschlüsse bevorzugt; längere Alternativen ausdrücklich gekennzeichnet. Rückflug erst nach tatsächlicher Ankunft, Buchungszeitraum strikt begrenzt, kalender- und kartengleiche Tarifpreise. W26 Molliburg/Miami-Zeiten aufeinander abgestimmt, keine Frequenzänderung. S27/W27/28 bleiben unverändert. Modellzeitzone, keine echte Ticketierung.
+
 ## Version 4.5 – vollständige Frequenzentzerrung
 
 Auch eigene Flüge müssen mindestens 120 Minuten auseinanderliegen (je gerichteter Strecke). Sommer-Molliburg-Rotation 14:00/15:45 statt 15:00/17:25. Vollständiger Datums-Audit: 489 Tage, 15.592 Flüge, 52 Richtungen, keine Abflugabstände unter 120 Minuten. Unveränderte Frequenzen, unveränderte Zahl erreichbarer MOL-Märkte in der Hochsaison-Referenzwoche. Modellzeit; keine reale Slot- oder Crew-Freigabe.

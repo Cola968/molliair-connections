@@ -947,8 +947,8 @@ const legacySchedules={
     "Mi",
     "Fr"
    ],
-   "depart": "09:15",
-   "returnDepart": "11:00",
+   "depart": "10:00",
+   "returnDepart": "11:30",
    "returnDayOffset": 0
   }
  ],
@@ -1000,7 +1000,7 @@ const legacySchedules={
     "Sa",
     "So"
    ],
-   "depart": "13:00",
+   "depart": "13:30",
    "returnDepart": "03:45",
    "returnDayOffset": 1
   },
