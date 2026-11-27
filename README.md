@@ -1,3 +1,7 @@
+## Version 4.2 – Flugauswahl und Reiseziele
+
+Vollständiger Zielkatalog aus dem Modell, getrennt nach eigenem Netz, Fremdairlines, aktuellem Altflugplan und Ausbau. Individuell lizenzierte Ortsbilder und ausdrücklich gekennzeichnete Symbolbilder. Flugsuche vergleicht sämtliche modellierten Wege bis zu zwei Umstiegen, verbirgt schlechtere Zubringer zum identischen Anschluss, sortiert nach Empfehlung, Abflug, Ankunft, Dauer und Preis, mit Kabinen- und Tageszeitfiltern. S27/W27-28 Anschlusszeiten wurden in einer 140-Kombinationen-Teiloptimierung verbessert; Altflugplan 2026 erhält gestaffelte eigene Frequenzen. Keine globale Optimierung aller Flugzeiten oder echte Ticketierung.
+
 ## Version 4.1 – Saisonflugplan und Buchungssimulation
 
 S27 Hochsaison: 74 eigene MOL-Abflüge/W, Atlanta Juni–September 3/W, MBG 28/W, MBG–MIA Mai–September 1/W. W27/28: 60 eigene MOL-Abflüge/W, MBG 21/W und MIA 10/W. Gemeinsame Modellzeitzone; Rückflüge über Saisonwechsel anhand des Abflugdatums. Buchungsauslastung und Preise sind deterministische Modellwerte je Datum, Richtung, Strecke, Kabine und Buchungsstand; lokale Reisepläne beeinflussen den Bestand. Keine echte Ticketierung oder Inventaranbindung. Historische Pressemeldungen bleiben als Archiv erhalten.

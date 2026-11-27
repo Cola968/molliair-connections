@@ -21,7 +21,7 @@ function routesForYear(data,year,season='summer',month=0){
    return {...r,frequency:rotations.reduce((n,x)=>n+x.days.length,0),daysActive:rotations.flatMap(x=>x.days),rotations,seasonPlan:true};
   }).filter(r=>r&&r.frequency);
  }
- return data.routes.filter(r=>(r.byYear[year]||0)>0).map(r=>{const s={...r,...(r.scheduleByYear?.[year]||{})};return {...s,frequency:r.byYear[year],daysActive:s.rotations?s.rotations.flatMap(()=>s.days):makeDays(s,r.byYear[year]),carrier:(year>=2030&&r.operatedBy2030)||r.carrier};});
+ return data.routes.filter(r=>(r.byYear[year]||0)>0).map(r=>{if(+year===2026&&data.legacySchedules?.[r.id]){const rotations=data.legacySchedules[r.id].map((x,index)=>({...x,index}));return {...r,frequency:rotations.reduce((n,x)=>n+x.days.length,0),daysActive:rotations.flatMap(x=>x.days),rotations,seasonPlan:true};}const s={...r,...(r.scheduleByYear?.[year]||{})};return {...s,frequency:r.byYear[year],daysActive:s.rotations?s.rotations.flatMap(()=>s.days):makeDays(s,r.byYear[year]),carrier:(year>=2030&&r.operatedBy2030)||r.carrier};});
 }
 function expandFlights(routes,data){const out=[];
  for(const r of routes){

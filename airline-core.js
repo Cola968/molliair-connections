@@ -26,7 +26,7 @@ function dateFlights(data,s,{includeOtherAirlines=false}={}){
  const select=(date)=>{const t=parseDay(date),season=seasonForDate(date);return logic.flightsFor(data,{year:t.getUTCFullYear()===2026||(t.getUTCFullYear()===2027&&date<'2027-03-28')?2026:t.getUTCFullYear()>=2030?2030:2027,day:DAYS[d.getUTCDay()],month:t.getUTCMonth()+1,...(season?{season}:{}),...opts});};
  // Return legs belong to the originating outbound service date across seasonal boundaries.
  let flights=select(s);
- if(data.seasonSchedules&&seasonForDate(s)){
+ if(data.seasonSchedules&&(seasonForDate(s)||data.legacySchedules&&s>='2026-11-23'&&s<'2027-03-28')){
    flights=flights.filter(f=>!f.serviceOffset).concat(select(dateShift(s,-1)).filter(f=>f.serviceOffset===1));
  }
  return flights.map(f=>{
@@ -61,7 +61,7 @@ function scheduledFlights(data,date,offset,includeOtherAirlines=false){
    arriveDate:dateShift(date,Math.floor(arriveMinute/1440)),departMinute,arriveMinute};
  });
 }
-function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg',asOf=null,reservations=[]}={}){
+function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg',asOf=null,reservations=[],limit=100}={}){
  if(!parseDay(date)||!data.airports.some(a=>a.code===from)||!data.airports.some(a=>a.code===to)||from===to)return [];
  const maxLegs=Math.min(3,Math.max(1,Number(maxStops)+1));
  const includeOtherAirlines=airlineScope==='all'||airlineScope==='partner';
@@ -90,12 +90,13 @@ function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440
  for(const first of firstFlights)explore([first],new Set([from,first.to]));
  const comparators={
   price:(a,b)=>a.price-b.price||a.minutes-b.minutes,
+  arrival:(a,b)=>a.legs.at(-1).arriveMinute-b.legs.at(-1).arriveMinute||a.minutes-b.minutes,
   time:(a,b)=>a.legs[0].departMinute-b.legs[0].departMinute||a.minutes-b.minutes||a.price-b.price,
   latest:(a,b)=>b.legs[0].departMinute-a.legs[0].departMinute||a.minutes-b.minutes||a.price-b.price,
   duration:(a,b)=>a.minutes-b.minutes||a.price-b.price,
   recommended:(a,b)=>a.stops-b.stops||a.minutes-b.minutes||a.price-b.price
  };
- return out.sort(comparators[sort]||comparators.recommended).slice(0,100);
+ return out.sort(comparators[sort]||comparators.recommended).slice(0,Number.isFinite(limit)?Math.max(0,limit):undefined);
 }
 function nextAvailableDates(data,from,to,fromDate,{days=21,maxStops=2,airlineScope='arg'}={}){
  if(!parseDay(fromDate))return[];
