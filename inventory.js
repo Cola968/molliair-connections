@@ -14,7 +14,7 @@ function cabinSeats(f,cabin='economy'){
 }
 function inventory(f,date,asOf=DEFAULT_ASOF,reservations=[],cabin='economy'){
  date=flightDate(f,date);const lead=Math.floor((day(date)-day(asOf))/DAY),seats=cabinSeats(f,cabin),capacity=seats.length;
- if(!Number.isFinite(lead)||lead<0||!capacity)return {capacity,booked:0,available:0,occupied:[],lead,load:0,closed:true};
+ if(!Number.isFinite(lead)||!capacity)return {capacity,booked:0,available:0,occupied:[],lead,load:0,closed:true};
  const month=Number(date.slice(5,7)),weekday=new Date(day(date)).getUTCDay(),intl=f.duration>=180;
  const peak=intl?([7,8,12].includes(month)?.075:[6,9,1].includes(month)?.025:-.025):([7,8,12].includes(month)?.045:0);
  const weekend=[0,5,6].includes(weekday)?.045:weekday===2?-.035:0;
@@ -24,7 +24,7 @@ function inventory(f,date,asOf=DEFAULT_ASOF,reservations=[],cabin='economy'){
  const initial=Math.min(capacity,Math.round(capacity*target*leadCurve(lead)));
  const order=seats.slice().sort((a,b)=>hash(f.flightNo+'|'+date+'|'+a)-hash(f.flightNo+'|'+date+'|'+b)||a.localeCompare(b));
  const occupied=new Set();
- let count=0;for(const b of reservations||[]){if(b.cancelled||(b.bookingAsOf&&b.bookingAsOf>asOf)||(b.fare==='BUSINESS'?'business':'economy')!==cabin)continue;
+ let count=0;for(const b of reservations||[]){if(b.cancelled||(b.fare==='BUSINESS'?'business':'economy')!==cabin)continue;
   for(const trip of [b.out,b.back].filter(Boolean)){for(const l of trip.legs||[]){if(!same(f,l,trip.date))continue;const qty=Math.max(0,Number(b.form?.adults||0)+Number(b.form?.children||0));count+=qty;
    if(trip===b.out&&l===trip.legs[0])for(const s of (b.selectedSeats||[]).slice(0,qty))if(seats.includes(s))occupied.add(s);
   }}
@@ -32,7 +32,7 @@ function inventory(f,date,asOf=DEFAULT_ASOF,reservations=[],cabin='economy'){
  const booked=Math.min(capacity,initial+count);
  for(const s of order){if(occupied.size>=booked)break;occupied.add(s);}
  const actual=Math.min(capacity,Math.max(booked,occupied.size));
- return {capacity,booked:actual,available:capacity-actual,occupied:[...occupied],lead,load:capacity?actual/capacity:0,closed:false,target};
+ return {capacity,booked:actual,available:lead<0?0:capacity-actual,occupied:[...occupied],lead,load:capacity?actual/capacity:0,closed:lead<0,target};
 }
 function itinerary(it,asOf=DEFAULT_ASOF,reservations=[],cabin='economy'){
  const legs=it.legs.map(f=>inventory(f,it.date,asOf,reservations,cabin));
