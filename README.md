@@ -1,3 +1,7 @@
+## Version 4.4 – gestaffelte Konkurrenzfrequenzen
+
+Parallele Airline-Abflüge auf derselben Richtung werden mindestens 120 Minuten getrennt. Miami: ML morgens/abends und AA mittags; Azul Belém abends, Air Madagascar mittags; American Boston abends an eigenen Flugtagen; winterliche Stachelair-Samstagsrotation angepasst. Altflugplan 2026/27 ebenfalls entzerrt. Alle Fremdflugzeiten bleiben fiktive Planungsvorschläge. Die Validierung meldet BANK_OVERLAP als Planungswarnung, nicht als gesetzlichen Slotverstoß. Frequenzen und eigene Umläufe bleiben unverändert.
+
 ## Version 4.3 – Netzweite Wellenoptimierung
 
 Alle 30 Sommer- und 22 Winterstrecken (einschließlich fremder Airlines) wurden als Zeitplanvariablen bzw. unveränderte Randbedingungen untersucht. Koordinatensuche mit ±60 Minuten, 15-Minuten-Raster, anschließenden Stachelcity-Wochentagsvarianten; 3.244 + 560 + 984 + 952 gültig bewertete Kandidaten bzw. Varianten. Keine globale Optimalität. 75 eigene Sommer-Flugpaare (74 MOL), 60 Winter-Flugpaare. Fremdflugzeiten sind Vorschläge im fiktiven Modell, keine bestätigten Partnerpläne. Anschlussmatrix im Operations Center: jede gerichtete Relation, Tag, kürzeste Reise und Lücken; Streckenprüfung beider Richtungen. 51 Referenzwochen ohne harte Fehler in der heuristischen Zuteilung, hypothetische Gegenflug-Warnhinweise bleiben sichtbar. Wartung, Crew und externe Drehkreuze fehlen weiterhin.
