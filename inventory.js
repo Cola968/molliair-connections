@@ -23,8 +23,8 @@ function inventory(f,date,asOf=DEFAULT_ASOF,reservations=[],cabin='economy'){
  const target=Math.max(.42,Math.min(1,(TARGET[f.routeId]??.80)+peak+weekend+direction+noise+(cabin==='business'?-.09:0)));
  const initial=Math.min(capacity,Math.round(capacity*target*leadCurve(lead)));
  const order=seats.slice().sort((a,b)=>hash(f.flightNo+'|'+date+'|'+a)-hash(f.flightNo+'|'+date+'|'+b)||a.localeCompare(b));
- const occupied=new Set(order.slice(0,initial));
- let count=0;for(const b of reservations||[]){if(b.cancelled||(b.fare==='BUSINESS'?'business':'economy')!==cabin)continue;
+ const occupied=new Set();
+ let count=0;for(const b of reservations||[]){if(b.cancelled||(b.bookingAsOf&&b.bookingAsOf>asOf)||(b.fare==='BUSINESS'?'business':'economy')!==cabin)continue;
   for(const trip of [b.out,b.back].filter(Boolean)){for(const l of trip.legs||[]){if(!same(f,l,trip.date))continue;const qty=Math.max(0,Number(b.form?.adults||0)+Number(b.form?.children||0));count+=qty;
    if(trip===b.out&&l===trip.legs[0])for(const s of (b.selectedSeats||[]).slice(0,qty))if(seats.includes(s))occupied.add(s);
   }}

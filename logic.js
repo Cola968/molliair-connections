@@ -13,7 +13,7 @@ const makeDays=(r,count)=>{
  return out;
 };
 function routesForYear(data,year,season='summer',month=0){
- if(+year===2027&&data.seasonSchedules?.[season]){
+ if(+year===2027&&data.seasonSchedules?.[season]&&data.routes.some(r=>data.seasonSchedules[season][r.id])){
   const schedule=data.seasonSchedules[season],m=month|| (season==='winter'?1:6);
   return data.routes.filter(r=>schedule[r.id]).map(r=>{
    const rotations=schedule[r.id].map((x,index)=>({...x,index})).filter(x=>!x.months||x.months.includes(m));

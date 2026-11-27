@@ -87,7 +87,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "20:30",
-    "returnDepart": "08:35",
+    "returnDepart": "07:55",
     "returnDayOffset": 1
    },
    {
@@ -567,7 +567,7 @@ const seasonSchedules={
      "So"
     ],
     "depart": "20:30",
-    "returnDepart": "08:35",
+    "returnDepart": "07:55",
     "returnDayOffset": 1
    },
    {

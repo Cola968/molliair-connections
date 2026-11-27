@@ -68,7 +68,7 @@ function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440
  const airlineNames=new Map(data.airlines.map(a=>[a.id,a.name]));
  const departures=[scheduledFlights(data,date,0,includeOtherAirlines),scheduledFlights(data,date,1,includeOtherAirlines),scheduledFlights(data,date,2,includeOtherAirlines)].flat();
  const byFrom=new Map();for(const f of departures){if(!byFrom.has(f.from))byFrom.set(f.from,[]);byFrom.get(f.from).push(f)}
- const out=[],seen=new Set(),connectionMin=60,connectionMax=Math.max(connectionMin,Math.min(1440,Number(maxLayoverMinutes)||1440));
+ const out=[],seen=new Set(),connectionMin=data.routes.some(r=>data.seasonSchedules?.summer?.[r.id])?60:45,connectionMax=Math.max(connectionMin,Math.min(1440,Number(maxLayoverMinutes)||1440));
  const firstFlights=departures.filter(f=>f.from===from&&f.departDate===date);
  function explore(legs,visited){
   const last=legs[legs.length-1];
