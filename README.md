@@ -1,3 +1,7 @@
+## Version 4.5 – vollständige Frequenzentzerrung
+
+Auch eigene Flüge müssen mindestens 120 Minuten auseinanderliegen (je gerichteter Strecke). Sommer-Molliburg-Rotation 14:00/15:45 statt 15:00/17:25. Vollständiger Datums-Audit: 489 Tage, 15.592 Flüge, 52 Richtungen, keine Abflugabstände unter 120 Minuten. Unveränderte Frequenzen, unveränderte Zahl erreichbarer MOL-Märkte in der Hochsaison-Referenzwoche. Modellzeit; keine reale Slot- oder Crew-Freigabe.
+
 ## Version 4.4 – gestaffelte Konkurrenzfrequenzen
 
 Parallele Airline-Abflüge auf derselben Richtung werden mindestens 120 Minuten getrennt. Miami: ML morgens/abends und AA mittags; Azul Belém abends, Air Madagascar mittags; American Boston abends an eigenen Flugtagen; winterliche Stachelair-Samstagsrotation angepasst. Altflugplan 2026/27 ebenfalls entzerrt. Alle Fremdflugzeiten bleiben fiktive Planungsvorschläge. Die Validierung meldet BANK_OVERLAP als Planungswarnung, nicht als gesetzlichen Slotverstoß. Frequenzen und eigene Umläufe bleiben unverändert.

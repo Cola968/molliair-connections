@@ -143,8 +143,8 @@ const seasonSchedules={
      "Sa",
      "So"
     ],
-    "depart": "15:00",
-    "returnDepart": "17:25",
+    "depart": "14:00",
+    "returnDepart": "15:45",
     "returnDayOffset": 0
    },
    {

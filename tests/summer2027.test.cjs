@@ -29,7 +29,7 @@ test('Monday has four MBG rotations and totals 74 own weekly hub departures',()=
  const own=all.filter(x=>x.from==='MOL');
  assert.equal(own.length,74);
  const monday=fl('2027-05-17').filter(x=>x.routeId==='mol-mbg'&&x.from==='MOL');
- assert.deepEqual(monday.map(f=>f.depart).sort(),['10:15','15:00','16:15','20:15']);
+ assert.deepEqual(monday.map(f=>f.depart).sort(),['10:15','14:00','16:15','20:15']);
 });
 test('partner itineraries remain selectable, no fake booking agreement',()=>{
  const paths=core.search(data,'MBG','PTY','2027-05-17',{maxStops:2,airlineScope:'all'});
