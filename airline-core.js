@@ -1,6 +1,7 @@
 (function(root){
 'use strict';
 const logic=(typeof require==='function'&&typeof module!=='undefined'&&module.exports)?require('./logic.js'):root.RouteLogic;
+const inventory=(typeof require==='function'&&typeof module!=='undefined'&&module.exports)?require('./inventory.js'):root.MolliairInventory;
 const DAYS=['So','Mo','Di','Mi','Do','Fr','Sa'];
 const PRICES={'mol-mbg':54,'mol-mhh':49,'mol-stc':85,'mol-mst':77,'mol-mia':239,'mol-jfk':269,'mol-bos':249,'mol-iad':259,'mol-atl':279,'mbg-mia':249,'mol-bel':189,'mol-tnr':162,'mol-ccs':149,'mol-geo':179,'mol-pty':179,'ml-mbg-ccs':192};
 const FARES={LIGHT:{label:'LIGHT',extra:0,cabin:8,checked:0,change:'Gegen Gebühr',seat:false},CLASSIC:{label:'CLASSIC',extra:39,cabin:8,checked:23,change:'Gegen Gebühr',seat:false},FLEX:{label:'FLEX',extra:89,cabin:12,checked:23,change:'Kostenlos',seat:true},BUSINESS:{label:'BUSINESS',extra:199,cabin:12,checked:32,change:'Kostenlos',seat:true}};
@@ -60,7 +61,7 @@ function scheduledFlights(data,date,offset,includeOtherAirlines=false){
    arriveDate:dateShift(date,Math.floor(arriveMinute/1440)),departMinute,arriveMinute};
  });
 }
-function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg'}={}){
+function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440,airlineScope='arg',asOf=null,reservations=[]}={}){
  if(!parseDay(date)||!data.airports.some(a=>a.code===from)||!data.airports.some(a=>a.code===to)||from===to)return [];
  const maxLegs=Math.min(3,Math.max(1,Number(maxStops)+1));
  const includeOtherAirlines=airlineScope==='all'||airlineScope==='partner';
@@ -72,7 +73,7 @@ function search(data,from,to,date,{maxStops=2,sort='time',maxLayoverMinutes=1440
  function explore(legs,visited){
   const last=legs[legs.length-1];
   if(last.to===to){
-   const it=toItinerary(legs,date,airlineNames);
+   const it=toItinerary(legs,date,airlineNames);if(asOf&&inventory){it.inventory=inventory.itinerary(it,asOf,reservations);it.businessInventory=inventory.itinerary(it,asOf,reservations,'business');it.price=Math.round(it.price*inventory.priceFactor({...it.inventory,lead:it.inventory.legs[0]?.lead??365}));}
    if(airlineScope==='partner'&&!it.hasOtherAirlines)return;
    if(!seen.has(it.id)){seen.add(it.id);out.push(it)}
    return;
