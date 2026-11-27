@@ -1,3 +1,7 @@
+## Version 3.4 – Wochenflugplan
+
+Datumsbezogene Sieben-Tage-Übersicht für alle Modellflughäfen, Abflüge und Ankünfte, Airline- und Textfilter, Plansitze und Tageszahlen. Nachtankünfte werden dem Ankunftstag zugeordnet. Keine Live-Daten.
+
 ## Version 3.3 – finaler Sommerflugplan 2027
 
 64 wöchentliche MOL-Abflüge, 65 Flugpaare inklusive saisonalem MBG–MIA (Mai–September). Drei tägliche MBG-Frequenzen, zwei tägliche MIA-Frequenzen, JFK 4/W, BOS 3/W, IAD 3/W. Flugplan ab 28. März 2027; Daten, Preise und Zeiten sind Modellwerte. Hubwellen, Flugtafeln, Buchung, Zielseiten und Newsroom nutzen den aktualisierten Stand. Keine Live-Daten, bestätigten Codeshares oder vollständige Umlaufvalidierung.
