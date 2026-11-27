@@ -1,200 +1,244 @@
 (function(root){const photos={
  "MOL": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Marina_Bay_Sands_20250903_%281%29.jpg/960px-Marina_Bay_Sands_20250903_%281%29.jpg",
+  "url": "images/destinations/MOL.webp",
   "author": "DvTor8303",
   "license": "CC0",
   "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "source": "https://commons.wikimedia.org/wiki/File:Marina_Bay_Sands_20250903_%281%29.jpg",
   "city": "Singapore",
-  "symbol": true
+  "symbol": true,
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Marina_Bay_Sands_20250903_%281%29.jpg/960px-Marina_Bay_Sands_20250903_%281%29.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "MBG": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Wellington_Panorama_View.jpg/960px-Wellington_Panorama_View.jpg",
+  "url": "images/destinations/MBG.webp",
   "author": "Ulrich Lange, Bochum, Germany",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "source": "https://commons.wikimedia.org/wiki/File:Wellington_Panorama_View.jpg",
   "city": "Wellington",
-  "symbol": true
+  "symbol": true,
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Wellington_Panorama_View.jpg/960px-Wellington_Panorama_View.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "MHH": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Puente_Don_Luis_I%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_13.JPG/1280px-Puente_Don_Luis_I%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_13.JPG",
+  "url": "images/destinations/MHH.webp",
   "author": "Diego Delso",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "source": "https://commons.wikimedia.org/wiki/File:Puente_Don_Luis_I%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_13.JPG",
   "city": "Porto",
-  "symbol": true
+  "symbol": true,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Puente_Don_Luis_I%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_13.JPG/1280px-Puente_Don_Luis_I%2C_Oporto%2C_Portugal%2C_2012-05-09%2C_DD_13.JPG",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "MHF": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Halifax_Harbour_Sunset_Skyline%2C_Nova_Scotia_%2824237034620%29.jpg/1280px-Halifax_Harbour_Sunset_Skyline%2C_Nova_Scotia_%2824237034620%29.jpg",
+  "url": "images/destinations/MHF.webp",
   "author": "Tony Webster from Minneapolis, Minnesota",
   "license": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Halifax_Harbour_Sunset_Skyline%2C_Nova_Scotia_%2824237034620%29.jpg",
   "city": "Halifax, Nova Scotia",
-  "symbol": true
+  "symbol": true,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Halifax_Harbour_Sunset_Skyline%2C_Nova_Scotia_%2824237034620%29.jpg/1280px-Halifax_Harbour_Sunset_Skyline%2C_Nova_Scotia_%2824237034620%29.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "STC": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/A_view_of_Rotterdam%2C_taken_from_the_roof_of_the_Maassilo%2C_Rotterdam%2C_The_Netherlands.jpg/1280px-A_view_of_Rotterdam%2C_taken_from_the_roof_of_the_Maassilo%2C_Rotterdam%2C_The_Netherlands.jpg",
+  "url": "images/destinations/STC.webp",
   "author": "Rob Oo",
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
   "source": "https://commons.wikimedia.org/wiki/File:A_view_of_Rotterdam%2C_taken_from_the_roof_of_the_Maassilo%2C_Rotterdam%2C_The_Netherlands.jpg",
   "city": "Rotterdam",
-  "symbol": true
+  "symbol": true,
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/A_view_of_Rotterdam%2C_taken_from_the_roof_of_the_Maassilo%2C_Rotterdam%2C_The_Netherlands.jpg/1280px-A_view_of_Rotterdam%2C_taken_from_the_roof_of_the_Maassilo%2C_Rotterdam%2C_The_Netherlands.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "MST": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg/1280px-Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg",
+  "url": "images/destinations/MST.webp",
   "author": "Dr. Thomas Liptak",
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg",
   "city": "Funchal",
-  "symbol": true
+  "symbol": true,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg/1280px-Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "JFK": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/1280px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg",
+  "url": "images/destinations/JFK.webp",
   "author": "Dllu",
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg",
   "city": "New York City",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/1280px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "IAD": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/12-07-13-washington-by-RalfR-08.jpg/960px-12-07-13-washington-by-RalfR-08.jpg",
+  "url": "images/destinations/IAD.webp",
   "author": "Ralf Roletschek ( talk ) - Infos über Fahrräder auf fahrradmonteur.de Wikis in der Ausbildung",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "source": "https://commons.wikimedia.org/wiki/File:12-07-13-washington-by-RalfR-08.jpg",
   "city": "Washington, D.C.",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/12-07-13-washington-by-RalfR-08.jpg/960px-12-07-13-washington-by-RalfR-08.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "MIA": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Miami%2C_Florida%2C_Skyline_4.jpg/1280px-Miami%2C_Florida%2C_Skyline_4.jpg",
+  "url": "images/destinations/MIA.webp",
   "author": "Wilfredor",
   "license": "CC0",
   "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "source": "https://commons.wikimedia.org/wiki/File:Miami%2C_Florida%2C_Skyline_4.jpg",
   "city": "Miami",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Miami%2C_Florida%2C_Skyline_4.jpg/1280px-Miami%2C_Florida%2C_Skyline_4.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "BOS": {
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Boston_-Massachusetts_State_House_%2848718911666%29.jpg/1280px-Boston_-Massachusetts_State_House_%2848718911666%29.jpg",
+  "url": "images/destinations/BOS.webp",
   "author": "Ajay Suresh from New York, NY, USA",
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Boston_-Massachusetts_State_House_%2848718911666%29.jpg",
   "city": "Boston",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Boston_-Massachusetts_State_House_%2848718911666%29.jpg/1280px-Boston_-Massachusetts_State_House_%2848718911666%29.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "YYZ": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Toronto_Skyline_from_Snake_Island%2C_September_11_2026_%2801%29.jpg/1280px-Toronto_Skyline_from_Snake_Island%2C_September_11_2026_%2801%29.jpg",
+  "url": "images/destinations/YYZ.webp",
   "author": "Dillan Payne",
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Toronto_Skyline_from_Snake_Island%2C_September_11_2026_%2801%29.jpg",
   "city": "Toronto",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Toronto_Skyline_from_Snake_Island%2C_September_11_2026_%2801%29.jpg/1280px-Toronto_Skyline_from_Snake_Island%2C_September_11_2026_%2801%29.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "BEL": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/L1010748-L1010765_copie_%28cropped%29.jpg/1280px-L1010748-L1010765_copie_%28cropped%29.jpg",
+  "url": "images/destinations/BEL.webp",
   "author": "Burn86",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "source": "https://commons.wikimedia.org/wiki/File:L1010748-L1010765_copie_%28cropped%29.jpg",
   "city": "Belém",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/L1010748-L1010765_copie_%28cropped%29.jpg/1280px-L1010748-L1010765_copie_%28cropped%29.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "GRU": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Marginal_Pinheiros_e_Jockey_Club.jpg/1280px-Marginal_Pinheiros_e_Jockey_Club.jpg",
+  "url": "images/destinations/GRU.webp",
   "author": "Agent010",
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Marginal_Pinheiros_e_Jockey_Club.jpg",
   "city": "São Paulo",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Marginal_Pinheiros_e_Jockey_Club.jpg/1280px-Marginal_Pinheiros_e_Jockey_Club.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "FOR": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Fortaleza%2C_Brazil_%284%29_%28cropped%29.jpg/960px-Fortaleza%2C_Brazil_%284%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail",
+  "url": "images/destinations/FOR.webp",
   "author": "ME/Portal da Copa",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "source": "https://commons.wikimedia.org/wiki/File:Fortaleza%2C_Brazil_%284%29_%28cropped%29.jpg",
   "city": "Fortaleza",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Fortaleza%2C_Brazil_%284%29_%28cropped%29.jpg/960px-Fortaleza%2C_Brazil_%284%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "REC": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg/1280px-Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg",
+  "url": "images/destinations/REC.webp",
   "author": "Portal da Copa/ME",
   "license": "CC BY 3.0 br",
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0/br/deed.en",
   "source": "https://commons.wikimedia.org/wiki/File:Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg",
   "city": "Recife",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg/1280px-Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "TNR": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Lake_Anosy%2C_Central_Antananarivo%2C_Capital_of_Madagascar%2C_Photo_by_Sascha_Grabow.jpg/960px-Lake_Anosy%2C_Central_Antananarivo%2C_Capital_of_Madagascar%2C_Photo_by_Sascha_Grabow.jpg",
+  "url": "images/destinations/TNR.webp",
   "author": "Sascha Grabow www.saschagrabow.com",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "source": "https://commons.wikimedia.org/wiki/File:Lake_Anosy%2C_Central_Antananarivo%2C_Capital_of_Madagascar%2C_Photo_by_Sascha_Grabow.jpg",
   "city": "Antananarivo",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Lake_Anosy%2C_Central_Antananarivo%2C_Capital_of_Madagascar%2C_Photo_by_Sascha_Grabow.jpg/960px-Lake_Anosy%2C_Central_Antananarivo%2C_Capital_of_Madagascar%2C_Photo_by_Sascha_Grabow.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "CCS": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Caracas_desde_el_%C3%A1vila.jpg/1280px-Caracas_desde_el_%C3%A1vila.jpg",
+  "url": "images/destinations/CCS.webp",
   "author": "Olga Berrios",
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Caracas_desde_el_%C3%A1vila.jpg",
   "city": "Caracas",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Caracas_desde_el_%C3%A1vila.jpg/1280px-Caracas_desde_el_%C3%A1vila.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "PTY": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/CintaCosteraPanama.jpg/1280px-CintaCosteraPanama.jpg",
+  "url": "images/destinations/PTY.webp",
   "author": "Ayaita",
   "license": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "source": "https://commons.wikimedia.org/wiki/File:CintaCosteraPanama.jpg",
   "city": "Panama City",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/CintaCosteraPanama.jpg/1280px-CintaCosteraPanama.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "BGI": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Bridgetown_aerial.JPG/960px-Bridgetown_aerial.JPG",
+  "url": "images/destinations/BGI.webp",
   "author": "P.Lechien",
   "license": "CC0",
   "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
   "source": "https://commons.wikimedia.org/wiki/File:Bridgetown_aerial.JPG",
   "city": "Bridgetown",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Bridgetown_aerial.JPG/960px-Bridgetown_aerial.JPG",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "POS": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Port_of_Spain_Trinidad.jpg/1280px-Port_of_Spain_Trinidad.jpg",
+  "url": "images/destinations/POS.webp",
   "author": "en:User:Christianwelsh",
   "license": "Public domain",
   "licenseUrl": "",
   "source": "https://commons.wikimedia.org/wiki/File:Port_of_Spain_Trinidad.jpg",
   "city": "Port of Spain",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Port_of_Spain_Trinidad.jpg/1280px-Port_of_Spain_Trinidad.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "GEO": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Guyana_Parliament_Building.jpg/960px-Guyana_Parliament_Building.jpg",
+  "url": "images/destinations/GEO.webp",
   "author": "David Stanley",
   "license": "CC BY 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
   "source": "https://commons.wikimedia.org/wiki/File:Guyana_Parliament_Building.jpg",
   "city": "Georgetown",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Guyana_Parliament_Building.jpg/960px-Guyana_Parliament_Building.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  },
  "ATL": {
-  "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Atlanta_skyline_from_Piedmont_Park_banner_2022.jpg/960px-Atlanta_skyline_from_Piedmont_Park_banner_2022.jpg",
+  "url": "images/destinations/ATL.webp",
   "author": "David.Cole",
   "license": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "source": "https://commons.wikimedia.org/wiki/File:Atlanta_skyline_from_Piedmont_Park_banner_2022.jpg",
   "city": "Atlanta",
-  "symbol": false
+  "symbol": false,
+  "originalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Atlanta_skyline_from_Piedmont_Park_banner_2022.jpg/960px-Atlanta_skyline_from_Piedmont_Park_banner_2022.jpg",
+  "modified": "WebP conversion and resizing; displayed with responsive cropping"
  }
 };root.MolliairPhotos=photos;if(typeof module!=='undefined'&&module.exports)module.exports=photos;})(typeof window!=='undefined'?window:globalThis);
